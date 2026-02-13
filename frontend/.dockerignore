@@ -1,0 +1,53 @@
+# LegalOS 4.0 - Frontend Docker Ignore
+node_modules
+dist
+dist-ssr
+*.local
+
+# Testing
+coverage
+*.test.ts
+*.test.tsx
+
+# IDEs
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.swp
+*.swo
+*~
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files
+*.tmp
+*.temp

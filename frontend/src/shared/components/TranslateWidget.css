@@ -1,0 +1,195 @@
+/* ===== TranslateWidget Styles ===== */
+
+/* Hide Google Translate default elements */
+.goog-te-banner-frame,
+.goog-te-gadget,
+#google_translate_element,
+.skiptranslate {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
+}
+
+/* Floating Action Button */
+.translate-fab {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
+}
+
+.translate-fab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 0 20px rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.translate-fab:active {
+    transform: translateY(0);
+}
+
+.translate-fab-label {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Language Selection Panel */
+.translate-panel {
+    position: fixed;
+    bottom: 80px;
+    left: 24px;
+    z-index: 10000;
+    width: 340px;
+    max-height: 480px;
+    background: linear-gradient(145deg, #0f172a 0%, #1a2332 50%, #0f172a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    animation: translatePanelIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes translatePanelIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.translate-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Search Input */
+.translate-search {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: #e2e8f0;
+    font-size: 12px;
+    outline: none;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.translate-search:focus {
+    border-color: rgba(16, 185, 129, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.translate-search::placeholder {
+    color: #64748b;
+}
+
+/* Language Grid */
+.translate-lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 8px;
+    max-height: 320px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.translate-lang-grid::-webkit-scrollbar {
+    width: 4px;
+}
+
+.translate-lang-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.translate-lang-grid::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* Language Button */
+.translate-lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+    font-family: inherit;
+    color: #e2e8f0;
+}
+
+.translate-lang-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.translate-lang-btn.active {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* Panel Footer */
+.translate-panel-footer {
+    padding: 8px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    text-align: center;
+}
+
+/* Responsive — move to bottom-center on mobile */
+@media (max-width: 640px) {
+    .translate-fab {
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .translate-fab:hover {
+        transform: translateX(-50%) translateY(-2px);
+    }
+
+    .translate-panel {
+        bottom: 70px;
+        left: 8px;
+        right: 8px;
+        width: auto;
+    }
+}

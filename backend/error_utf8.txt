@@ -1,0 +1,71 @@
+﻿python : Traceback (most recent call 
+last):
+At line:1 char:1
++ python -c "from app.main import 
+app" 2>&1 | Out-String | Set-Content  
+...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo          : NotSpec 
+   ified: (Traceback (most recent ca  
+  ll last)::String) [], RemoteExcep   
+ tion
+    + FullyQualifiedErrorId : NativeC 
+   ommandError
+ 
+  File "<string>", line 1, in <module>
+    from app.main import app
+  File "D:\Project\nationals\backend\a
+pp\main.py", line 7, in <module>
+    from app.api.v1.router import 
+api_router
+  File "D:\Project\nationals\backend\a
+pp\api\v1\router.py", line 3, in 
+<module>
+    from app.api.v1.endpoints import (
+    ...<4 lines>...
+    )
+  File "D:\Project\nationals\backend\a
+pp\api\v1\endpoints\warrant.py", line 
+7, in <module>
+    from app.services.warrant_manager 
+import warrant_service
+  File "D:\Project\nationals\backend\a
+pp\services\warrant_manager.py", line 
+71, in <module>
+    warrant_service = 
+WarrantManagerService()
+  File "D:\Project\nationals\backend\a
+pp\services\warrant_manager.py", line 
+18, in __init__
+    self._seed_data()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\Project\nationals\backend\a
+pp\services\warrant_manager.py", line 
+22, in _seed_data
+    self.warrants[w_id] = Warrant(
+                          ~~~~~~~^
+        id=w_id,
+        ^^^^^^^^
+    ...<6 lines>...
+        expiry_date=None
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\sasib\AppData\Local\P
+rograms\Python\Python313\Lib\site-pack
+ages\pydantic\main.py", line 253, in 
+__init__
+    validated_self = self.__pydantic_v
+alidator__.validate_python(data, 
+self_instance=self)
+pydantic_core._pydantic_core.Validatio
+nError: 1 validation error for Warrant
+execution_notes
+  Field required [type=missing, 
+input_value={'id': 
+'8346ca41-9750-4cc...1', 
+'expiry_date': None}, input_type=dict]
+    For further information visit http
+s://errors.pydantic.dev/2.11/v/missing
+

@@ -1,0 +1,5 @@
+﻿src/core/services/registryService.ts(13,61): error TS2345: Argument of type '{ document_url: string; filing_type: FilingType | undefined; }' is not assignable to parameter of type 'string'.
+src/features/common/wrappers/NyayaBotWrapper.tsx(2,25): error TS2307: Cannot find module '../../../core/context/AuthContext' or its corresponding type declarations.
+src/personas/police/pages/DutyRoster.tsx(8,5): error TS2305: Module '"lucide-react"' has no exported member 'RefreshRr'.
+src/personas/police/pages/FinancialAnalyzer.tsx(146,84): error TS2339: Property 'total_amount' does not exist on type 'NetworkEdge'.
+
