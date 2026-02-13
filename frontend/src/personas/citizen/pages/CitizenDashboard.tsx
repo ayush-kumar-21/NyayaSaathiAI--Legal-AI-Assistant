@@ -196,7 +196,7 @@ const CitizenDashboard: React.FC<CitizenDashboardProps> = ({ currentUser, t: _t,
                         Namaste, {userName} 🙏
                     </h1>
                     <p className="text-[var(--mid)] mt-1 text-sm sm:text-base">
-                        NyayaSahayak is ready to assist you with your legal journey.
+                        NyayaSaathiAI is ready to assist you with your legal journey.
                     </p>
                 </div>
                 <div className="flex items-center gap-3">

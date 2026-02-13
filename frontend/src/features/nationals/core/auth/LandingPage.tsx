@@ -22,7 +22,7 @@ const LandingPage = () => {
                     <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center text-white">
                         <Shield size={18} fill="currentColor" />
                     </div>
-                    <span className="text-xl font-bold tracking-tight">NyayaSahayak</span>
+                    <span className="text-xl font-bold tracking-tight">NyayaSaathiAI</span>
                 </div>
                 <div className="text-sm font-semibold text-slate-500 uppercase tracking-wider">
                     National Hackathon Edition

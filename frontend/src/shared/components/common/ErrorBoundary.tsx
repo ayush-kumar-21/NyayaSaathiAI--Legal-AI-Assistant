@@ -1,5 +1,5 @@
 // src/shared/components/common/ErrorBoundary.tsx
-// NyayaSahayak - Error Boundary for Graceful Error Handling
+// NyayaSaathiAI - Error Boundary for Graceful Error Handling
 // Ensures citizens always see a helpful message, never a blank screen
 
 import { Component, ErrorInfo, ReactNode } from 'react';

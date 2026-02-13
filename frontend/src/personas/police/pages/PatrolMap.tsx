@@ -1,5 +1,5 @@
 // src/personas/police/pages/PatrolMap.tsx
-// NyayaSahayak Hybrid v2.0.0 - Police Patrol Map
+// NyayaSaathiAI Hybrid v2.0.0 - Police Patrol Map
 // Zero-Dormant Three-State Implementation + Leaflet.js CDN
 
 import React, { useEffect, useRef, useState } from 'react';

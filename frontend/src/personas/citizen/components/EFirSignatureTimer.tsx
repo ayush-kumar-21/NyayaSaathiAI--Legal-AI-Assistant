@@ -1,5 +1,5 @@
 // src/personas/citizen/components/EFirSignatureTimer.tsx
-// NyayaSahayak v2.0.0 - BNSS Section 173(1)(ii) Compliance
+// NyayaSaathiAI v2.0.0 - BNSS Section 173(1)(ii) Compliance
 // 72-Hour e-FIR Signature Timer Component
 
 import React, { useState, useEffect, useCallback } from 'react';

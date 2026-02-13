@@ -1,5 +1,5 @@
 // src/shared/styles/designTokens.ts
-// NyayaSahayak Design System - Centralized Design Tokens
+// NyayaSaathiAI Design System - Centralized Design Tokens
 // Ensures consistent styling across the entire citizen portal
 
 export const colors = {

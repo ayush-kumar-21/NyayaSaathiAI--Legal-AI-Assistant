@@ -1,5 +1,5 @@
 // src/personas/judge/pages/JudgeBoard.tsx
-// NyayaSahayak Hybrid v2.0.0 - Judge Daily Board
+// NyayaSaathiAI Hybrid v2.0.0 - Judge Daily Board
 // Enhanced with Constitutional Safeguards & सत्यमेव जयते
 
 import React, { useState, useMemo, useEffect, useCallback } from 'react';

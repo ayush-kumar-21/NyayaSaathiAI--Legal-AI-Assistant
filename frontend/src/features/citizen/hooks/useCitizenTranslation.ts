@@ -1,5 +1,5 @@
 // src/features/citizen/hooks/useCitizenTranslation.ts
-// NyayaSahayak Citizen Portal Translation Hook
+// NyayaSaathiAI Citizen Portal Translation Hook
 // Returns translated strings based on current language setting
 
 import { useMemo } from 'react';

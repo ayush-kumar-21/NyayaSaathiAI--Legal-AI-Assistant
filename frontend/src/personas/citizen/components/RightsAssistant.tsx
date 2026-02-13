@@ -3,7 +3,7 @@ import { Send, User, Bot } from 'lucide-react';
 
 export const RightsAssistant: React.FC = () => {
     const [messages, setMessages] = useState([
-        { id: 1, type: 'bot', text: 'Namaste! I am NyayaSahayak. Ask me about your legal rights or bail process.' }
+        { id: 1, type: 'bot', text: 'Namaste! I am NyayaSaathiAI. Ask me about your legal rights or bail process.' }
     ]);
     const [input, setInput] = useState('');
     const [isTyping, setIsTyping] = useState(false);

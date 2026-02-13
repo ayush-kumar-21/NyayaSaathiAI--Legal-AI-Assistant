@@ -1,5 +1,5 @@
 // src/shared/components/common/ProgressRing.tsx
-// NyayaSahayak Animated Progress Indicator
+// NyayaSaathiAI Animated Progress Indicator
 // Beautiful circular progress for loading and completion states
 
 import React from 'react';

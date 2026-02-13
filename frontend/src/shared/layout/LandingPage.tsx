@@ -1,5 +1,5 @@
 // src/shared/layout/LandingPage.tsx
-// NyayaSahayak - Landing Page with Unified Authentication for All Personas
+// NyayaSaathiAI - Landing Page with Unified Authentication for All Personas
 
 import { useState } from 'react';
 import { Shield, Gavel, User, ArrowRight, Activity, Lock, Building2 } from 'lucide-react';
@@ -70,8 +70,8 @@ const LandingPage = () => {
 
             <nav className="relative z-10 flex items-center justify-between px-6 py-6 md:px-12 max-w-7xl mx-auto">
                 <div className="flex items-center gap-2">
-                    <img src="/logo.png" alt="NyayaSahayak" className="w-10 h-10 rounded-lg" />
-                    <span className="text-xl font-bold tracking-tight">NyayaSahayak</span>
+                    <img src="/logo.png" alt="NyayaSaathiAI" className="w-10 h-10 rounded-lg" />
+                    <span className="text-xl font-bold tracking-tight">NyayaSaathiAI</span>
                 </div>
                 <div className="flex items-center gap-4">
                     <button onClick={() => navigate('/team')} className="text-sm font-semibold text-slate-500 hover:text-orange-600 transition-colors">

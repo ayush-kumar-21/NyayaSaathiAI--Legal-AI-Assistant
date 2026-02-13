@@ -1,5 +1,5 @@
 // src/shared/layout/JudgeLayout.tsx
-// NyayaSahayak Hybrid v2.0.0 - Judge Persona Layout Wrapper
+// NyayaSaathiAI Hybrid v2.0.0 - Judge Persona Layout Wrapper
 
 import React, { useState } from 'react';
 import { Outlet, NavLink, useNavigate, Link } from 'react-router-dom';
@@ -138,7 +138,7 @@ const JudgeLayout: React.FC = () => {
                         </button>
                         {/* 3D Logo Effect */}
                         <div className="relative">
-                            <img src="/logo.png" alt="NyayaSahayak"
+                            <img src="/logo.png" alt="NyayaSaathiAI"
                                 className="w-12 h-12 rounded-xl shadow-lg"
                                 style={{ boxShadow: '0 8px 20px rgba(168, 85, 247, 0.3)' }} />
                             <div className="absolute inset-0 rounded-xl bg-purple-500/20 animate-pulse" />

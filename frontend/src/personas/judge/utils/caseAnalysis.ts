@@ -1,5 +1,5 @@
 // src/personas/judge/utils/caseAnalysis.ts
-// NyayaSahayak - Case Analysis Utilities for Judge Portal
+// NyayaSaathiAI - Case Analysis Utilities for Judge Portal
 // Extracted for better code organization and reusability
 
 import { BNSS_193_LIMITS } from '../../../shared/utils/legalCompliance';

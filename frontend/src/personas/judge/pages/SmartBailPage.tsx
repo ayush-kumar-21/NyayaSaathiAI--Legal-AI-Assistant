@@ -1,5 +1,5 @@
 // src/personas/judge/pages/SmartBailPage.tsx
-// NyayaSahayak Hybrid v2.0.0 - Smart Bail Analysis Page
+// NyayaSaathiAI Hybrid v2.0.0 - Smart Bail Analysis Page
 // AI-powered bail recommendation system
 
 import React, { useState } from 'react';

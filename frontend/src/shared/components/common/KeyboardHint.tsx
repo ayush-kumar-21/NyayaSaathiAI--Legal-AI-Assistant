@@ -1,5 +1,5 @@
 // src/shared/components/common/KeyboardHint.tsx  
-// NyayaSahayak Keyboard Accessibility Hints
+// NyayaSaathiAI Keyboard Accessibility Hints
 // Shows keyboard shortcuts for power users
 
 import React from 'react';

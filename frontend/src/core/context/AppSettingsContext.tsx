@@ -1,5 +1,5 @@
 // src/core/context/AppSettingsContext.tsx
-// NyayaSahayak - Global App Settings for Accessibility & Internationalization
+// NyayaSaathiAI - Global App Settings for Accessibility & Internationalization
 // Manages language, theme, font size, and simplified mode across the application
 
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';

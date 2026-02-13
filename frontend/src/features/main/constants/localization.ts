@@ -1,6 +1,6 @@
 
 export const enTranslations = {
-    header_title: "NyayaSahayak",
+    header_title: "NyayaSaathiAI",
     tab_case_triage: "Case Triage",
     tab_document_analysis: "Document Analysis",
     tab_nyayabot: "NYAYABOT",

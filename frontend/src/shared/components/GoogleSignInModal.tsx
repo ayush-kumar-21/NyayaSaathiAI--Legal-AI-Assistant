@@ -1,5 +1,5 @@
 // src/shared/components/GoogleSignInModal.tsx
-// NyayaSahayak - Simulated Google OAuth Modal for Hackathon Demo
+// NyayaSaathiAI - Simulated Google OAuth Modal for Hackathon Demo
 // Ready for real Google Identity Services upgrade
 
 import React, { useState } from 'react';
@@ -108,7 +108,7 @@ const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({ isOpen, onClose, 
                                 Continue with Google
                             </button>
                             <p className="text-xs text-gray-400">
-                                By signing in, you agree to NyayaSahayak's Terms of Service
+                                By signing in, you agree to NyayaSaathiAI's Terms of Service
                             </p>
                         </div>
                     )}

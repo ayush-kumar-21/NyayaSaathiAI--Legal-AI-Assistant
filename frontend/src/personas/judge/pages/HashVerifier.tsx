@@ -1,5 +1,5 @@
 // src/personas/judge/pages/HashVerifier.tsx
-// NyayaSahayak Hybrid v2.0.0 - Judicial Integrity Check
+// NyayaSaathiAI Hybrid v2.0.0 - Judicial Integrity Check
 // Zero-Knowledge Verification of Digital Evidence
 
 import React, { useState, useRef, useCallback } from 'react';

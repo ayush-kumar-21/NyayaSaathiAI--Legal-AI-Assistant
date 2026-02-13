@@ -1,5 +1,5 @@
 // src/shared/components/accessibility/SkipLink.tsx
-// NyayaSahayak - Accessibility Skip Link for Keyboard Users
+// NyayaSaathiAI - Accessibility Skip Link for Keyboard Users
 // Per WCAG 2.1 AA Compliance
 
 import React from 'react';

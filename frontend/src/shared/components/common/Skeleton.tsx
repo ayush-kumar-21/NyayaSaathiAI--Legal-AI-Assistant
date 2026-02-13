@@ -1,5 +1,5 @@
 // src/shared/components/common/Skeleton.tsx
-// NyayaSahayak Premium Skeleton Loaders
+// NyayaSaathiAI Premium Skeleton Loaders
 // Beautiful loading states for better perceived performance
 
 import React from 'react';

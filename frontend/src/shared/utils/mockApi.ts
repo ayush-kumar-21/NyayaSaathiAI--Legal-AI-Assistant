@@ -1,5 +1,5 @@
 // src/shared/utils/mockApi.ts
-// NyayaSahayak Hybrid - Zero-Dormant Mock API Utilities
+// NyayaSaathiAI Hybrid - Zero-Dormant Mock API Utilities
 // PURPOSE: Simulates network latency to force "Loading/Success/Error" states
 
 /**

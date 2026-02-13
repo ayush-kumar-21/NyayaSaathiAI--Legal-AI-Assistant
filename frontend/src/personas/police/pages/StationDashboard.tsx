@@ -1,5 +1,5 @@
 // src/personas/police/pages/StationDashboard.tsx
-// NyayaSahayak Hybrid v2.0.0 - Police Station Dashboard (NyayaRakshak)
+// NyayaSaathiAI Hybrid v2.0.0 - Police Station Dashboard (NyayaRakshak)
 // Features: Zero FIR Transfer Timer, Active FIR Stats
 
 import React, { useState, useEffect } from 'react';

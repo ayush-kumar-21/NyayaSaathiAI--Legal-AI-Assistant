@@ -1,5 +1,5 @@
 // src/types/fir.types.ts
-// NyayaSahayak v2.0.0 - BNSS Section 173 Compliant FIR Types
+// NyayaSaathiAI v2.0.0 - BNSS Section 173 Compliant FIR Types
 // Implements e-FIR 72-hour signature timer requirements
 
 /**

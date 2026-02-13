@@ -1,5 +1,5 @@
 // src/shared/components/common/OfflineBanner.tsx
-// NyayaSahayak - Offline Detection Banner for Rural India
+// NyayaSaathiAI - Offline Detection Banner for Rural India
 // Critical for users with unstable internet connectivity
 
 import React, { useState, useEffect } from 'react';

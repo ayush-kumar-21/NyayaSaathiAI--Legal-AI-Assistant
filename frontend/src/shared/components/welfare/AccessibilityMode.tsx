@@ -200,7 +200,7 @@ const AccessibilityMode: React.FC<AccessibilityModeProps> = ({ isOpen, onClose }
                 {settings.voiceNav && (
                     <div className="p-4 border-t border-slate-700/50">
                         <button
-                            onClick={() => speak('नमस्ते, न्याय सहायक में आपका स्वागत है। यह ऐप आपको शिकायत दर्ज करने और मामले को ट्रैक करने में मदद करता है।')}
+                            onClick={() => speak('नमस्ते, न्याय साथी AI में आपका स्वागत है। यह ऐप आपको शिकायत दर्ज करने और मामले को ट्रैक करने में मदद करता है।')}
                             disabled={speaking}
                             className="w-full py-3 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 disabled:opacity-50"
                         >

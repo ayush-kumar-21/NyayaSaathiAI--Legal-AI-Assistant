@@ -1,5 +1,5 @@
 // src/shared/pages/ProfileSettings.tsx
-// NyayaSahayak Hybrid v2.0.0 - User Profile & Settings Page
+// NyayaSaathiAI Hybrid v2.0.0 - User Profile & Settings Page
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -48,7 +48,7 @@ const ProfileSettings: React.FC = () => {
             case 'POLICE': return 'NyayaRakshak Portal';
             case 'CITIZEN': return 'NyayaSetu Portal';
             case 'ADMIN': return 'Admin Console';
-            default: return 'NyayaSahayak';
+            default: return 'NyayaSaathiAI';
         }
     };
 
@@ -220,7 +220,7 @@ const ProfileSettings: React.FC = () => {
 
                 {/* App Version */}
                 <p className="text-center text-xs text-slate-600 mt-6">
-                    NyayaSahayak Hybrid v2.0.0 • HMAC Secured Session
+                    NyayaSaathiAI Hybrid v2.0.0 • HMAC Secured Session
                 </p>
             </div>
         </div>

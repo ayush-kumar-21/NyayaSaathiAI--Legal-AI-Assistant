@@ -1,5 +1,5 @@
 // src/pages/TeamPage.tsx
-// NyayaSahayak - Meet the Team / Authors Page
+// NyayaSaathiAI - Meet the Team / Authors Page
 
 import { ArrowLeft, Linkedin, GraduationCap, Code2, Scale, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -42,8 +42,8 @@ const TeamPage = () => {
                     className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors group"
                 >
                     <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-                    <img src="/logo.png" alt="NyayaSahayak" className="w-8 h-8 rounded-lg" />
-                    <span className="text-lg font-bold tracking-tight text-slate-900">NyayaSahayak</span>
+                    <img src="/logo.png" alt="NyayaSaathiAI" className="w-8 h-8 rounded-lg" />
+                    <span className="text-lg font-bold tracking-tight text-slate-900">NyayaSaathiAI</span>
                 </button>
                 <div className="text-sm font-semibold text-slate-500 uppercase tracking-wider hidden sm:block">
                     Meet the Team
@@ -67,7 +67,7 @@ const TeamPage = () => {
                     </span>
                 </h1>
                 <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-                    NyayaSahayak is crafted by two engineering students who believe technology
+                    NyayaSaathiAI is crafted by two engineering students who believe technology
                     can transform India's judicial system — making it faster, fairer, and accessible to every citizen.
                 </p>
             </section>
@@ -89,8 +89,8 @@ const TeamPage = () => {
                         About the Project
                     </div>
                     <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">
-                        NyayaSahayak{' '}
-                        <span className="text-slate-400 font-medium">— न्याय सहायक</span>
+                        NyayaSaathiAI{' '}
+                        <span className="text-slate-400 font-medium">— न्याय साथी AI</span>
                     </h2>
                     <p className="text-slate-500 leading-relaxed max-w-2xl mx-auto mb-6">
                         India's first AI-powered judicial interface that enables citizens to file FIRs via voice,
@@ -113,14 +113,14 @@ const TeamPage = () => {
                         className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 transition-all duration-300"
                     >
                         <Sparkles size={16} />
-                        Explore NyayaSahayak
+                        Explore NyayaSaathiAI
                     </button>
                 </div>
             </section>
 
             {/* Footer */}
             <footer className="relative z-10 text-center py-8 text-sm text-slate-400">
-                © 2026 NyayaSahayak · Built with ❤️ at VIT Vellore
+                © 2026 NyayaSaathiAI · Built with ❤️ at VIT Vellore
             </footer>
         </div>
     );

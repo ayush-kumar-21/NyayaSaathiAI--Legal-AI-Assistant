@@ -1,5 +1,5 @@
 // src/shared/utils/legalCompliance.ts
-// NyayaSahayak - Legal Compliance Utilities
+// NyayaSaathiAI - Legal Compliance Utilities
 // Reference utilities for BNSS, BNS, and Constitutional provisions
 
 /**

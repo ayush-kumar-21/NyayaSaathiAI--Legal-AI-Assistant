@@ -1,5 +1,5 @@
 // src/personas/admin/pages/AdminDashboard.tsx
-// NyayaSahayak Hybrid v3.0.0 - Premium 3D Government Dashboard (NyayaPrashaasak)
+// NyayaSaathiAI Hybrid v3.0.0 - Premium 3D Government Dashboard (NyayaPrashaasak)
 // Fully Functional: Export, Interactive Heatmap, 3D Design
 // सत्यमेव जयते - Truth Alone Triumphs
 

@@ -1,5 +1,5 @@
 // src/personas/citizen/pages/AboutPage.tsx
-// NyayaSahayak - About Us Page
+// NyayaSaathiAI - About Us Page
 // Professional, Accessible, Animated - Mission: Justice for All
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -100,7 +100,7 @@ const AboutPage: React.FC = () => {
         'Hindi + 22 regional languages'
     ];
     return (
-        <main id="main-content" className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 overflow-hidden" role="main" aria-label="About NyayaSahayak">
+        <main id="main-content" className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 overflow-hidden" role="main" aria-label="About NyayaSaathiAI">
             {/* Skip Link for Accessibility */}
             <a
                 href="#core-pillars"
@@ -204,7 +204,7 @@ const AboutPage: React.FC = () => {
                         <h2 id="comparison-heading" className="text-3xl md:text-4xl font-bold text-white mb-4">
                             Transforming Indian Justice
                         </h2>
-                        <p className="text-slate-400">See how NyayaSahayak changes everything</p>
+                        <p className="text-slate-400">See how NyayaSaathiAI changes everything</p>
                     </motion.div>
                     <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                         {/* Old Way */}
@@ -246,9 +246,9 @@ const AboutPage: React.FC = () => {
                                 <div className="p-3 rounded-xl bg-emerald-500/20">
                                     <CheckCircle className="w-6 h-6 text-emerald-400" aria-hidden="true" />
                                 </div>
-                                <h3 className="text-xl font-bold text-white">The NyayaSahayak Way</h3>
+                                <h3 className="text-xl font-bold text-white">The NyayaSaathiAI Way</h3>
                             </div>
-                            <ul className="space-y-4" role="list" aria-label="NyayaSahayak solutions">
+                            <ul className="space-y-4" role="list" aria-label="NyayaSaathiAI solutions">
                                 {newWayFeatures.map((feature, index) => (
                                     <motion.li
                                         key={index}
@@ -356,7 +356,7 @@ const AboutPage: React.FC = () => {
                                 </h2>
                                 <p className="text-slate-400 mb-6 leading-relaxed">
                                     The Bharatiya Nagarik Suraksha Sanhita (BNSS) mandates strict timelines for FIR registration,
-                                    evidence handling, and case disposal. NyayaSahayak automates these requirements, ensuring
+                                    evidence handling, and case disposal. NyayaSaathiAI automates these requirements, ensuring
                                     <span className="text-amber-400 font-semibold"> zero compliance violations</span>.
                                 </p>
                                 <div className="flex flex-wrap gap-3">
@@ -399,7 +399,7 @@ const AboutPage: React.FC = () => {
                         Justice Should Know No Boundaries
                     </h2>
                     <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
-                        Whether you're in a metro city or rural village, NyayaSahayak brings the power of
+                        Whether you're in a metro city or rural village, NyayaSaathiAI brings the power of
                         AI and blockchain to your fingertips. Your right to swift justice is now a reality.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -423,7 +423,7 @@ const AboutPage: React.FC = () => {
                             A Government of India Initiative | Ministry of Home Affairs | Digital India
                         </p>
                         <p className="text-xs text-slate-600 mt-2">
-                            © 2024 NyayaSahayak. Empowering Citizens, Enabling Justice.
+                            © 2024 NyayaSaathiAI. Empowering Citizens, Enabling Justice.
                         </p>
                     </div>
                 </motion.div>

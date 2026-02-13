@@ -1,5 +1,5 @@
 // src/core/services/forensicInterlock.ts
-// NyayaSahayak v2.0.0 - BNSS Section 176(3) Forensic Interlock Service
+// NyayaSaathiAI v2.0.0 - BNSS Section 176(3) Forensic Interlock Service
 // Validates forensic compliance before charge sheet submission
 
 import type {

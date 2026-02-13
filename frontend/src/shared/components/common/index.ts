@@ -1,5 +1,5 @@
 // src/shared/components/common/index.ts
-// NyayaSahayak Premium UI Components
+// NyayaSaathiAI Premium UI Components
 // Central export for all common components
 
 // Error Handling

@@ -1,5 +1,5 @@
 // src/shared/components/ChainOfCustodyTimeline.tsx
-// NyayaSahayak v2.0.0 - Chain of Custody Visual Timeline
+// NyayaSaathiAI v2.0.0 - Chain of Custody Visual Timeline
 // Implements vertical stepper with Akhand Ledger verification and gap analysis
 
 import React, { useState, useMemo } from 'react';

@@ -1,5 +1,5 @@
 // src/personas/judge/components/CognizanceReview.tsx
-// NyayaSahayak v2.0.0 - BNSS 176(3) Exception Review for Magistrates
+// NyayaSaathiAI v2.0.0 - BNSS 176(3) Exception Review for Magistrates
 // Allows Judges to review forensic videography exceptions at cognizance stage
 
 import React, { useState } from 'react';

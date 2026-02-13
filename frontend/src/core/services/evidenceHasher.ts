@@ -1,5 +1,5 @@
 // src/core/services/evidenceHasher.ts
-// NyayaSahayak v2.0.0 - BSA Section 63 Compliant Evidence Hasher
+// NyayaSaathiAI v2.0.0 - BSA Section 63 Compliant Evidence Hasher
 // Implements SHA-256 chunked hashing for large files
 
 import CryptoJS from 'crypto-js';

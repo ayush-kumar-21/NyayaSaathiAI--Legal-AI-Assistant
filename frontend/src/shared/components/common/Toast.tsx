@@ -1,5 +1,5 @@
 // src/shared/components/common/Toast.tsx
-// NyayaSahayak Toast Notifications System
+// NyayaSaathiAI Toast Notifications System
 // Premium notifications for user feedback
 
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';

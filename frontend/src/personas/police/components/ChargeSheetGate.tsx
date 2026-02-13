@@ -1,5 +1,5 @@
 // src/personas/police/components/ChargeSheetGate.tsx
-// NyayaSahayak v2.0.0 - BNSS Section 176(3) Charge Sheet Interlock
+// NyayaSaathiAI v2.0.0 - BNSS Section 176(3) Charge Sheet Interlock
 // Blocks charge sheet submission unless forensic compliance is verified
 
 import React, { useState, useEffect } from 'react';

@@ -1,5 +1,5 @@
 // src/shared/components/welfare/ChildProtectionHub.tsx
-// NyayaSahayak - Child Protection Hub (Bal Suraksha - बाल सुरक्षा)
+// NyayaSaathiAI - Child Protection Hub (Bal Suraksha - बाल सुरक्षा)
 // Comprehensive child safety: POCSO reporting, Childline, child labor, missing children
 
 import React, { useState } from 'react';

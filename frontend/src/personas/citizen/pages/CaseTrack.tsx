@@ -31,7 +31,7 @@ const MOCK_CASES: Record<string, any> = {
         applicableLaw: 'BNS',
         sections: ['BNS 303', 'BNS 351'],
         events: [
-            { title: 'e-FIR Lodged', description: 'Complaint registered via NyayaSahayak App', date: '2025-10-20T10:30:00', status: 'COMPLETE', icon: '📄' },
+            { title: 'e-FIR Lodged', description: 'Complaint registered via NyayaSaathiAI App', date: '2025-10-20T10:30:00', status: 'COMPLETE', icon: '📄' },
             { title: 'IO Assigned', description: 'Inspector Rajesh Sharma (Station ID: 442)', date: '2025-10-21T09:15:00', status: 'COMPLETE', icon: '👮' },
             { title: 'Evidence Collection', description: 'Forensic team visiting crime scene', date: '2025-10-22T14:00:00', status: 'CURRENT', icon: '🔍' },
             { title: 'Charge Sheet Filing', description: 'Expected within 60 days (BNSS Sec 193)', date: null, status: 'PENDING', icon: '⚖️' },

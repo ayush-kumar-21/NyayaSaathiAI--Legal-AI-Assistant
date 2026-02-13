@@ -1,5 +1,5 @@
 // src/core/auth/AuthContext.tsx
-// NyayaSahayak Hybrid v2.0.0 - Centralized Authentication Context
+// NyayaSaathiAI Hybrid v2.0.0 - Centralized Authentication Context
 // Extended version with ADMIN role support, React Router v6 integration, and HMAC security
 
 import React, { createContext, useContext, useState, useEffect } from 'react';

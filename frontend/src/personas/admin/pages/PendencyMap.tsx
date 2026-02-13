@@ -1,5 +1,5 @@
 // src/personas/admin/pages/PendencyMap.tsx
-// NyayaSahayak Hybrid v2.0.0 - Case Pendency Heatmap
+// NyayaSaathiAI Hybrid v2.0.0 - Case Pendency Heatmap
 // Geospatial visualization of case backlogs
 
 import React, { useEffect, useRef, useState } from 'react';

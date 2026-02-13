@@ -1,5 +1,5 @@
 // src/types/custody.types.ts
-// NyayaSahayak v2.0.0 - Chain of Custody Types
+// NyayaSaathiAI v2.0.0 - Chain of Custody Types
 // Implements evidence tracking from seizure to court with Akhand Ledger verification
 
 /**

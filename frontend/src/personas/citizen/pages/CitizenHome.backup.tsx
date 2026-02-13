@@ -1,5 +1,5 @@
 // src/personas/citizen/pages/CitizenHome.tsx
-// NyayaSahayak Hybrid v3.0.0 - Premium 3D Citizen Portal
+// NyayaSaathiAI Hybrid v3.0.0 - Premium 3D Citizen Portal
 // Enhanced with Accessibility, Legal Compliance & Error Boundaries
 // सत्यमेव जयते - Truth Alone Triumphs
 
@@ -44,7 +44,7 @@ class JusticeOrbErrorBoundary extends Component<
                 <div className="w-full h-full flex items-center justify-center">
                     <div className="text-center p-8">
                         <Scale className="w-16 h-16 text-emerald-400 mx-auto mb-4" />
-                        <p className="text-emerald-300 font-medium">न्याय सहायक</p>
+                        <p className="text-emerald-300 font-medium">न्याय साथी AI</p>
                         <p className="text-slate-400 text-sm mt-2">AI-Powered Justice</p>
                     </div>
                 </div>

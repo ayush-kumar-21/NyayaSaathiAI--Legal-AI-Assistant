@@ -1,5 +1,5 @@
 // src/shared/layout/CitizenLayout.tsx
-// NyayaSahayak Hybrid v3.0.0 - 3D Immersive Citizen Portal Layout
+// NyayaSaathiAI Hybrid v3.0.0 - 3D Immersive Citizen Portal Layout
 // Expert-Level Mobile Responsive with Welfare Features
 
 import React, { useState, useEffect, lazy, Suspense } from 'react';
@@ -225,7 +225,7 @@ const CitizenLayout: React.FC = () => {
 
                         <div className="flex items-center gap-2">
                             <div className="relative">
-                                <img src="/logo.png" alt="NyayaSahayak" className="w-7 h-7 md:w-8 md:h-8 rounded-lg" />
+                                <img src="/logo.png" alt="NyayaSaathiAI" className="w-7 h-7 md:w-8 md:h-8 rounded-lg" />
                                 <div className="absolute inset-0 bg-emerald-500/20 rounded-lg blur-md -z-10" />
                             </div>
                             <span className="text-lg md:text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">

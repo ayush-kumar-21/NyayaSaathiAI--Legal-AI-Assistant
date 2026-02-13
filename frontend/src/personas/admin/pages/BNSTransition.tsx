@@ -1,5 +1,5 @@
 // src/personas/admin/pages/BNSTransition.tsx
-// NyayaSahayak Hybrid v2.0.0 - BNS Transition Tracker
+// NyayaSaathiAI Hybrid v2.0.0 - BNS Transition Tracker
 // IPC to BNS Migration Dashboard
 
 import React from 'react';

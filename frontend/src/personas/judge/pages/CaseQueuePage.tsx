@@ -1,5 +1,5 @@
 // src/personas/judge/pages/CaseQueuePage.tsx
-// NyayaSahayak Hybrid v2.0.0 - Case Queue Page
+// NyayaSaathiAI Hybrid v2.0.0 - Case Queue Page
 // Standalone case queue without external prop dependencies
 
 import React, { useState } from 'react';

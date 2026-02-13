@@ -1,5 +1,5 @@
 // src/features/main/components/LegalTechHub.tsx
-// NyayaSahayak Hybrid v2.0.0 - Legal Tech Hub (Corrected)
+// NyayaSaathiAI Hybrid v2.0.0 - Legal Tech Hub (Corrected)
 // Fixed: Using Lucide icons, dark mode styling, loading states
 
 import React, { useState, useRef } from 'react';

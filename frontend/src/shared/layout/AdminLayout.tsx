@@ -1,5 +1,5 @@
 // src/shared/layout/AdminLayout.tsx
-// NyayaSahayak Hybrid v2.0.0 - Admin Persona Layout Wrapper
+// NyayaSaathiAI Hybrid v2.0.0 - Admin Persona Layout Wrapper
 // Updated for LegalOS 4.0 Sidebar Structure
 
 import React, { useState } from 'react';
@@ -120,7 +120,7 @@ const AdminLayout: React.FC = () => {
                         >
                             <Menu className="w-5 h-5" />
                         </button>
-                        <img src="/logo.png" alt="NyayaSahayak" className="w-8 h-8 rounded-lg" />
+                        <img src="/logo.png" alt="NyayaSaathiAI" className="w-8 h-8 rounded-lg" />
                         <span className="text-xl font-bold text-white">NyayaPrashaasak</span>
                         <span className="text-xs bg-amber-500/20 text-amber-400 px-2 py-1 rounded-full">
                             Admin Portal

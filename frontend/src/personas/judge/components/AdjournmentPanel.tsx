@@ -1,5 +1,5 @@
 // src/personas/judge/components/AdjournmentPanel.tsx
-// NyayaSahayak Hybrid v2.0.0 - Adjournment Control Panel
+// NyayaSaathiAI Hybrid v2.0.0 - Adjournment Control Panel
 // Implements BNSS Sec 346 - Maximum 2 adjournments limit
 
 import React, { useState } from 'react';

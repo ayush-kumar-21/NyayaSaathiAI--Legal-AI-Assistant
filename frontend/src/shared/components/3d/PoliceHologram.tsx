@@ -1,5 +1,5 @@
 // src/shared/components/3d/PoliceHologram.tsx
-// NyayaSahayak - Premium 3D Police Hologram (NyayaRakshak)
+// NyayaSaathiAI - Premium 3D Police Hologram (NyayaRakshak)
 // Features: Holographic Shield, scanning radar, and drone swarms
 
 import React, { useEffect, useRef } from 'react';

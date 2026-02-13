@@ -101,7 +101,7 @@ const AboutCTA: React.FC<AboutCTAProps> = ({ t: _t, onGetStarted }) => {
                         <button
                             onClick={handleGetStarted}
                             className="btn btn-primary px-10 py-4 text-lg font-semibold rounded-full inline-flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary-500)] focus:ring-offset-2 focus:ring-offset-[var(--bg0)] sheen"
-                            aria-label="Get started with NyayaSahayak"
+                            aria-label="Get started with NyayaSaathiAI"
                             style={{ minWidth: '220px' }}
                         >
                             Get Started

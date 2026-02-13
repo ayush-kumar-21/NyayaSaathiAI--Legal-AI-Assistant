@@ -1,5 +1,5 @@
 // src/core/hooks/useTranslation.ts
-// NyayaSahayak Translation Hook
+// NyayaSaathiAI Translation Hook
 // Connects the language setting to the translation strings
 
 import { useMemo } from 'react';

@@ -1,5 +1,5 @@
 // src/types/forensic.types.ts
-// NyayaSahayak v2.0.0 - BNSS Section 176(3) Forensic Compliance Types
+// NyayaSaathiAI v2.0.0 - BNSS Section 176(3) Forensic Compliance Types
 // Implements mandatory videography requirements for offenses ≥7 years
 
 /**

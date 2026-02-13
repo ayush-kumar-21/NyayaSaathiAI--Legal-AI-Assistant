@@ -1,5 +1,5 @@
 // src/shared/components/common/OnboardingTip.tsx
-// NyayaSahayak First-Time User Onboarding
+// NyayaSaathiAI First-Time User Onboarding
 // Helps citizens understand features
 
 import React, { useState, useEffect } from 'react';

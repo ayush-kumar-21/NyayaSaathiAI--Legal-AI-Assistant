@@ -1,5 +1,5 @@
 // src/types/pilot.ts
-// NyayaSahayak Hybrid v2.0.0 - BNS/BNSS Pilot Types
+// NyayaSaathiAI Hybrid v2.0.0 - BNS/BNSS Pilot Types
 // Section 3 of Master Implementation Guide
 
 export type LawSystem = 'IPC' | 'BNS';

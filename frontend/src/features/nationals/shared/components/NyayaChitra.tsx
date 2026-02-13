@@ -146,7 +146,7 @@ const NyayaChitra: React.FC<NyayaChitraProps> = ({ legalText, language }) => {
             .join('\n\n');
 
         const encodedMessage = encodeURIComponent(
-            `NyayaSahayak Case Update:\n\n${message}\n\n- Powered by NyayaSahayak`
+            `NyayaSaathiAI Case Update:\n\n${message}\n\n- Powered by NyayaSaathiAI`
         );
 
         const url = `https://api.whatsapp.com/send?text=${encodedMessage}`;

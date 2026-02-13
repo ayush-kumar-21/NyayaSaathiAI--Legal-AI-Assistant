@@ -17,7 +17,7 @@ interface AboutProps {
 }
 
 /**
- * About - Premium landing page showcasing NyayaSahayak
+ * About - Premium landing page showcasing NyayaSaathiAI
  * 
  * Narrative Arc: Chaos → Clarity → Trust
  * 

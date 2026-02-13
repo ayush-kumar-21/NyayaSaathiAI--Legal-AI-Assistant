@@ -1,5 +1,5 @@
 // src/personas/police/pages/PoliceDashboard.tsx
-// NyayaSahayak Hybrid v3.0.0 - Premium 3D Police Dashboard (NyayaRakshak)
+// NyayaSaathiAI Hybrid v3.0.0 - Premium 3D Police Dashboard (NyayaRakshak)
 // Fully Functional: Export, Action Modals, Auto-Refresh + 3D Design
 // सत्यमेव जयते - Truth Alone Triumphs
 

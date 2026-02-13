@@ -1,5 +1,5 @@
 // src/types/evidence.types.ts
-// NyayaSahayak v2.0.0 - BSA Section 63 Compliant Evidence Types
+// NyayaSaathiAI v2.0.0 - BSA Section 63 Compliant Evidence Types
 // Implements digital evidence certification requirements
 
 /**

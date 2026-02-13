@@ -1,5 +1,5 @@
 // src/core/legal/offenceMapper.ts
-// NyayaSahayak Hybrid v2.0.0 - Hybrid Offence Engine
+// NyayaSaathiAI Hybrid v2.0.0 - Hybrid Offence Engine
 // Section 4 of Master Implementation Guide
 // Handles IPC ↔ BNS switching based on incident date (Article 20 protection)
 

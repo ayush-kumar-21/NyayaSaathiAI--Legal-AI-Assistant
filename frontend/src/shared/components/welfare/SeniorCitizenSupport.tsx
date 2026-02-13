@@ -1,5 +1,5 @@
 // src/shared/components/welfare/SeniorCitizenSupport.tsx
-// NyayaSahayak - Senior Citizen Support (Vriddhashram Sahayata)
+// NyayaSaathiAI - Senior Citizen Support (Vriddhashram Sahayata)
 // Comprehensive elder care, abuse reporting, pension help & legal aid
 
 import React, { useState } from 'react';

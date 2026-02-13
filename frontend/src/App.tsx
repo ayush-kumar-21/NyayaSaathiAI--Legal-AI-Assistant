@@ -75,7 +75,7 @@ const SignInWrapper = () => {
     // Mock translation function
     const t = (key: string) => {
         const translations: { [key: string]: string } = {
-            'header_title': 'NyayaSahayak',
+            'header_title': 'NyayaSaathiAI',
             'about_desc': 'AI-Powered Legal Assistance',
             'email_address': 'Email Address',
             'password': 'Password',

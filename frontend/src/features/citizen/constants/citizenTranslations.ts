@@ -1,5 +1,5 @@
 // src/features/citizen/constants/citizenTranslations.ts
-// NyayaSahayak Citizen Portal Translations
+// NyayaSaathiAI Citizen Portal Translations
 // All 22 scheduled Indian languages + English with proper fallback architecture
 
 // Base English translations (complete set)

@@ -91,7 +91,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
 
             <main className="flex-1 relative overflow-y-auto h-screen">
                 <header className={`md:hidden h-16 ${glassClass} backdrop-blur-md border-b flex items-center justify-between px-4 sticky top-0 z-30`}>
-                    <span className="font-bold text-lg">NyayaSahayak</span>
+                    <span className="font-bold text-lg">NyayaSaathiAI</span>
                     <button onClick={() => setSidebarOpen(true)} className="p-2 active:scale-95 transition-transform"><Menu /></button>
                 </header>
 

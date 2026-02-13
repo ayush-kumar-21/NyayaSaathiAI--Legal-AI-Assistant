@@ -1,5 +1,5 @@
 // src/shared/components/3d/JusticeOrb.tsx
-// NyayaSahayak - Premium 3D Justice Orb Component
+// NyayaSaathiAI - Premium 3D Justice Orb Component
 // Pure Three.js implementation for maximum compatibility
 
 import React, { useEffect, useRef, useCallback } from 'react';

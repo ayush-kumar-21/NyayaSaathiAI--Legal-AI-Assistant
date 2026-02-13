@@ -1,5 +1,5 @@
 // src/shared/layout/PoliceLayout.tsx
-// NyayaSahayak Hybrid v2.0.0 - Police Persona Layout Wrapper
+// NyayaSaathiAI Hybrid v2.0.0 - Police Persona Layout Wrapper
 
 import React, { useState } from 'react';
 import { Outlet, useNavigate, Link } from 'react-router-dom';
@@ -113,7 +113,7 @@ const PoliceLayout: React.FC = () => {
                         >
                             <Menu className="w-6 h-6" />
                         </button>
-                        <img src="/logo.png" alt="NyayaSahayak" className="w-8 h-8 rounded-lg shadow-md hover:scale-105 transition-transform" />
+                        <img src="/logo.png" alt="NyayaSaathiAI" className="w-8 h-8 rounded-lg shadow-md hover:scale-105 transition-transform" />
                         <div>
                             <span className="text-xl font-bold text-white tracking-wide">NyayaRakshak</span>
                             <span className="ml-2 text-[10px] bg-blue-600/20 text-blue-300 px-2 py-0.5 rounded border border-blue-500/30 uppercase tracking-wider">

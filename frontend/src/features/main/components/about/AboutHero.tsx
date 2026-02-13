@@ -95,7 +95,7 @@ const AboutHero: React.FC<AboutHeroProps> = ({ t, onExploreClick }) => {
                     ref={titleRef}
                     className="title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 gradient-text"
                 >
-                    {t('header_title') || 'NyayaSahayak'}
+                    {t('header_title') || 'NyayaSaathiAI'}
                 </h1>
 
                 {/* Subtitle */}
@@ -112,7 +112,7 @@ const AboutHero: React.FC<AboutHeroProps> = ({ t, onExploreClick }) => {
                     className="text-base sm:text-lg md:text-xl text-[var(--low)] max-w-2xl mx-auto mb-10 leading-relaxed"
                 >
                     <strong className="text-[var(--hi)]">5 crore cases pending.</strong>{' '}
-                    Every delay is justice denied. NyayaSahayak brings AI-assisted triage,
+                    Every delay is justice denied. NyayaSaathiAI brings AI-assisted triage,
                     translation in <strong className="text-[var(--primary-500)]">22 Indian languages</strong>,
                     and intelligent drafting to accelerate the delivery of justice.
                 </p>
@@ -125,7 +125,7 @@ const AboutHero: React.FC<AboutHeroProps> = ({ t, onExploreClick }) => {
                     <button
                         onClick={handleExploreClick}
                         className="btn btn-primary px-8 py-3 text-base font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--primary-500)] focus:ring-offset-2 focus:ring-offset-[var(--bg0)]"
-                        aria-label="Explore features of NyayaSahayak"
+                        aria-label="Explore features of NyayaSaathiAI"
                     >
                         Explore Features
                         <ChevronDown className="w-4 h-4 ml-1" aria-hidden="true" />
@@ -134,7 +134,7 @@ const AboutHero: React.FC<AboutHeroProps> = ({ t, onExploreClick }) => {
                     <button
                         onClick={handleSignInClick}
                         className="btn px-8 py-3 text-base font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--stroke)] focus:ring-offset-2 focus:ring-offset-[var(--bg0)]"
-                        aria-label="Sign in to NyayaSahayak"
+                        aria-label="Sign in to NyayaSaathiAI"
                     >
                         Sign In
                         <span aria-hidden="true">→</span>

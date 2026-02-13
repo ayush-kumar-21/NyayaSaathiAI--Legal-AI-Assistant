@@ -63,7 +63,7 @@ app.include_router(api_router, prefix="/api/v1")
 @app.get("/")
 async def root():
     return {
-        "message": "LegalOS 4.0 API — NyayaSahayak",
+        "message": "LegalOS 4.0 API — NyayaSaathiAI",
         "version": settings.VERSION,
         "docs": "/docs",
         "auth": {

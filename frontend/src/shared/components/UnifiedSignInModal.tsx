@@ -1,5 +1,5 @@
 // src/shared/components/UnifiedSignInModal.tsx
-// NyayaSahayak - Unified Authentication Modal for All Personas
+// NyayaSaathiAI - Unified Authentication Modal for All Personas
 // Supports Citizen, Judge, Police, and Admin with role-specific verification
 
 import React, { useState } from 'react';
@@ -502,7 +502,7 @@ const UnifiedSignInModal: React.FC<UnifiedSignInModalProps> = ({
             case 'POLICE': return 'NyayaRakshak (Police Portal)';
             case 'JUDGE': return 'NyayaAdhikari (Judiciary Portal)';
             case 'ADMIN': return 'NyayaPrashaasak (Admin Portal)';
-            default: return 'NyayaSahayak';
+            default: return 'NyayaSaathiAI';
         }
     };
 
@@ -552,7 +552,7 @@ const UnifiedSignInModal: React.FC<UnifiedSignInModalProps> = ({
                     {step === 'role-select' && (
                         <div className="space-y-4">
                             <div className="text-center mb-6">
-                                <h2 className="text-xl font-bold text-gray-900 mb-1">Welcome to NyayaSahayak</h2>
+                                <h2 className="text-xl font-bold text-gray-900 mb-1">Welcome to NyayaSaathiAI</h2>
                                 <p className="text-gray-500 text-sm">
                                     Select your role to continue / जारी रखने के लिए अपनी भूमिका चुनें
                                 </p>
