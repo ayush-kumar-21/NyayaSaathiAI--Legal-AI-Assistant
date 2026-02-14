@@ -305,13 +305,17 @@ const UnifiedSignInModal: React.FC<UnifiedSignInModalProps> = ({
         } catch (err: any) {
             setStep('verify');
             console.error("Google Auth Error:", err);
-            setError(err.response?.data?.detail || 'Google authentication failed. Please try again.');
+            console.error("Google Auth Error Response:", err.response);
+            console.error("Google Auth Error Detail:", err.response?.data);
+
+            const errorMessage = err.response?.data?.detail || err.message || 'Google authentication failed. Please try again.';
+            setError(errorMessage);
         }
     };
 
     const handleGoogleFailure = () => {
-        console.error("Google Sign-In Failed");
-        setError("Google Sign-In Failed. Please try again.");
+        console.error("Google Sign-In Failed (Client Side)");
+        setError("Google Sign-In Failed (Client Side). Please try again.");
     };
 
     const handleClose = () => {

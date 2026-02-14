@@ -20,14 +20,11 @@ class Settings(BaseSettings):
     GOOGLE_CLIENT_ID: str = "your-google-client-id"
 
     # CORS
-    ALLOWED_ORIGINS: List[str] = [
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:3000",
-        "http://localhost:5174",
-        "http://127.0.0.1:5174",
-    ]
+    CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
+
+    @property
+    def ALLOWED_ORIGINS(self) -> List[str]:
+        return [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
 
     # Database
     DATABASE_URL: str = "sqlite:///./legalos.db"

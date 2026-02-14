@@ -139,7 +139,12 @@ def google_login(payload: GoogleLoginRequest, db: Session = Depends(get_db)):
         target_audience = client_id if client_id and client_id != "your-google-client-id" else None
         
         print(f"DEBUG: Google login attempt. Client ID configured: {target_audience is not None}")
+        print(f"DEBUG: Received token (first 20 chars): {payload.token[:20]}...")
         
+        email = None
+        name = "Google User"
+        picture = ""
+
         try:
             # Try to verify with Google servers
             idinfo = id_token.verify_oauth2_token(
@@ -153,38 +158,57 @@ def google_login(payload: GoogleLoginRequest, db: Session = Depends(get_db)):
             print(f"DEBUG: Google token verified for: {email}")
         except Exception as verify_error:
             print(f"DEBUG: Token verification failed: {verify_error}")
+            
             # Fallback: decode the JWT payload without verification (for dev/demo)
             # Google ID tokens are JWTs - we can decode the payload
             import json, base64
-            parts = payload.token.split('.')
-            if len(parts) != 3:
-                raise HTTPException(status_code=401, detail=f"Invalid token format")
-            # Decode the payload (second part)
-            padded = parts[1] + '=' * (4 - len(parts[1]) % 4)
-            decoded = base64.urlsafe_b64decode(padded)
-            idinfo = json.loads(decoded)
-            email = idinfo.get('email', '')
-            name = idinfo.get('name', 'Google User')
-            picture = idinfo.get('picture', '')
-            if not email:
-                raise HTTPException(status_code=401, detail="Could not extract email from Google token")
-            print(f"DEBUG: Extracted from token payload: {email} (unverified fallback)")
+            try:
+                parts = payload.token.split('.')
+                if len(parts) != 3:
+                    print(f"DEBUG: Invalid token format. Parts: {len(parts)}")
+                    raise HTTPException(status_code=401, detail=f"Invalid token format. Expected 3 parts, got {len(parts)}")
+                
+                # Decode the payload (second part)
+                padded = parts[1] + '=' * (4 - len(parts[1]) % 4)
+                decoded = base64.urlsafe_b64decode(padded)
+                idinfo = json.loads(decoded)
+                
+                email = idinfo.get('email', '')
+                name = idinfo.get('name', 'Google User')
+                picture = idinfo.get('picture', '')
+                
+                if not email:
+                    print("DEBUG: Email not found in token payload")
+                    raise HTTPException(status_code=401, detail="Could not extract email from Google token")
+                    
+                print(f"DEBUG: Extracted from token payload: {email} (unverified fallback)")
+            except Exception as decode_error:
+                print(f"DEBUG: Token decoding failed: {decode_error}")
+                raise HTTPException(status_code=400, detail=f"Token decoding failed: {str(decode_error)}")
+
+        if not email:
+             raise HTTPException(status_code=400, detail="Email extraction failed")
 
         # Find or create user
         user = db.query(User).filter(User.email == email).first()
         if not user:
             # Auto-signup as CITIZEN
-            user = User(
-                email=email,
-                hashed_password=get_password_hash("google_auth"),
-                role="CITIZEN",
-                full_name=name,
-                avatar=picture or f"https://api.dicebear.com/7.x/avataaars/svg?seed={name}"
-            )
-            db.add(user)
-            db.commit()
-            db.refresh(user)
-            print(f"DEBUG: Created new user: {email}")
+            try:
+                user = User(
+                    email=email,
+                    hashed_password=get_password_hash("google_auth"),
+                    role="CITIZEN",
+                    full_name=name,
+                    avatar=picture or f"https://api.dicebear.com/7.x/avataaars/svg?seed={name}"
+                )
+                db.add(user)
+                db.commit()
+                db.refresh(user)
+                print(f"DEBUG: Created new user: {email}")
+            except Exception as db_error:
+                print(f"DEBUG: Database error creating user: {db_error}")
+                db.rollback()
+                raise HTTPException(status_code=500, detail=f"Database error: {str(db_error)}")
         else:
             print(f"DEBUG: Found existing user: {email}")
         
@@ -202,4 +226,5 @@ def google_login(payload: GoogleLoginRequest, db: Session = Depends(get_db)):
         raise
     except Exception as e:
         print(f"DEBUG: Google Auth Unexpected Error: {type(e).__name__}: {e}")
-        raise HTTPException(status_code=400, detail=f"Google Auth Failed: {str(e)}")
+        # Return specific error for debugging
+        raise HTTPException(status_code=400, detail=f"Google Auth Failed: {type(e).__name__}: {str(e)}")
