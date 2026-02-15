@@ -4,7 +4,7 @@ import sys
 
 client = TestClient(app)
 
-def test_endpoint(name, url, method="GET", json_data=None):
+def check_endpoint(name, url, method="GET", json_data=None):
     try:
         if method == "GET":
             response = client.get(url)
@@ -25,7 +25,7 @@ print("--- STARTING BACKEND INTEGRATION TESTS ---\n")
 
 def run_tests():
     success = True
-    success &= test_endpoint("Health Check", "/health")
+    success &= check_endpoint("Health Check", "/health")
 
     # Note: These endpoints might fail if they require DB state or Auth headers
     # Adding basic auth headers bypass or mock might be needed for real integration tests
@@ -36,7 +36,7 @@ def run_tests():
     # The previous test endpoints seem to be admin/protected.
 
     # Let's test the new endpoints we created
-    success &= test_endpoint("National Stats (Auth Required)", "/api/v1/admin/analytics/national")
+    success &= check_endpoint("National Stats (Auth Required)", "/api/v1/admin/analytics/national")
 
     print("\n--- TEST SUMMARY ---")
     if success:
