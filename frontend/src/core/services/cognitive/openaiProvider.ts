@@ -54,9 +54,11 @@ export const chatWithNyayabotOpenAI = async (message: string, ragContext?: strin
     // Add recent history
     const recentHistory = history.slice(-10); // Keep last 10 messages
     recentHistory.forEach(msg => {
-        if (msg.role === 'user' || msg.role === 'assistant') { // OpenAI uses 'assistant', our app uses 'model' sometimes?
-            // App uses 'model' for Gemini, 'assistant' is standard for OpenAI
-            const role = msg.role === 'model' ? 'assistant' : msg.role;
+        // Map 'model' to 'assistant' for OpenAI
+        let role = msg.role === 'model' ? 'assistant' : msg.role;
+
+        // Ensure role is valid for OpenAI (ignoring system for history for now or mapping if needed)
+        if (role === 'user' || role === 'assistant') {
             messages.push({ role: role, content: msg.content });
         }
     });
@@ -82,7 +84,11 @@ export const chatWithNyayabotOpenAI = async (message: string, ragContext?: strin
     // Actually, looking at hybridService.chatWithNyayabotInternal, it returns `geminiClient.models.generateContent` result.
     // We should probably adapt this in hybridService, but let's return the text here.
     return {
-        text: () => completion.choices[0].message.content || ""
+        text: completion.choices[0].message.content || "",
+        candidates: [{
+            content: { parts: [{ text: completion.choices[0].message.content || "" }] },
+            groundingMetadata: { groundingChunks: [] } // Add dummy grounding to avoid crash
+        }]
     };
 };
 

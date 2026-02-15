@@ -259,7 +259,10 @@ export const hybridService = {
         }, fallbackDocAnalysis),
 
     chatWithNyayabot: async (message: string, ragParts?: Part[], history: ChatMessage[] = []) => {
-        if (AI_PROVIDER === 'OPENAI') {
+        // Enforce OpenAI for NyayaBot as per user request
+        // if (AI_PROVIDER === 'OPENAI') { 
+        if (true) { // Forced OpenAI for NyayaBot
+            console.log("NyayaBot: Forced OpenAI mode active");
             const ragText = ragParts ? partsToText(ragParts) : undefined;
             return await chatWithNyayabotOpenAI(message, ragText, history);
         }

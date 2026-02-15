@@ -555,7 +555,7 @@ const Nyayabot: React.FC<NyayabotProps> = ({ t, messages, setMessages, currentUs
                                 <Clock className="text-lg" />
                             </button>
                             <img src="/logo.png" alt="Nyaya Sahayak" className="w-8 h-8 object-contain" />
-                            <h2 className="text-xl font-bold text-gray-900 dark:text-white hidden sm:block">{t('tab_nyayabot')}</h2>
+                            <h2 className="text-xl font-bold text-gray-900 dark:text-white hidden sm:block">{t('tab_nyayabot')} (OpenAI)</h2>
                             {ragFiles.length > 0 && (
                                 <span className="px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/30 text-purple-600 dark:text-purple-300 text-xs font-bold flex items-center gap-1.5">
                                     <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span> RAG Active
