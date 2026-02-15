@@ -31,12 +31,12 @@ class PoliceService {
 
     // ── Skill 02: Financial Trail Analyzer ──
     async analyzeFinancialTrail(data: FinancialAnalysisRequest): Promise<FinancialAnalysisResponse> {
-        const response = await api.post<FinancialAnalysisResponse>('/police/financial/analyze', data);
+        const response = await api.post<FinancialAnalysisResponse>('/police/analyze', data);
         return response.data;
     }
 
     async testFinancialAnalysis(): Promise<FinancialAnalysisResponse> {
-        const response = await api.post<FinancialAnalysisResponse>('/police/financial/test-analyze');
+        const response = await api.post<FinancialAnalysisResponse>('/police/test-analyze');
         return response.data;
     }
 

@@ -168,9 +168,11 @@ class FinancialService(BaseService[FinancialAnalysisResponse, str]):
                 estimated_amount=anomalies[0].amount_involved
             ))
 
+        analysis_uuid = str(uuid.uuid4())
         response = FinancialAnalysisResponse(
+            id=analysis_uuid,
             case_id=request.case_id,
-            analysis_id=str(uuid.uuid4()),
+            analysis_id=analysis_uuid,
             network=FinancialNetwork(nodes=nodes, edges=edges),
             anomalies=anomalies,
             leads=leads,

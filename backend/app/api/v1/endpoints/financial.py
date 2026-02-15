@@ -99,10 +99,10 @@ async def test_financial_analysis(
     ]
     
     test_accounts = [
-        Account(account_number="ACC-001", account_holder="Rahul Sharma", bank_name="SBI"),
-        Account(account_number="ACC-002", account_holder="Global Traders", bank_name="ICICI"),
-        Account(account_number="ACC-003", account_holder="ABC Enterprises", bank_name="HDFC"),
-        Account(account_number="ACC-004", account_holder="XYZ Consultants", bank_name="Axis"),
+        Account(account_number="ACC-001", account_holder="Rahul Sharma", bank_name="SBI", account_type="savings"),
+        Account(account_number="ACC-002", account_holder="Global Traders", bank_name="ICICI", account_type="current"),
+        Account(account_number="ACC-003", account_holder="ABC Enterprises", bank_name="HDFC", account_type="current"),
+        Account(account_number="ACC-004", account_holder="XYZ Consultants", bank_name="Axis", account_type="current"),
     ]
     
     request = FinancialAnalysisRequest(
