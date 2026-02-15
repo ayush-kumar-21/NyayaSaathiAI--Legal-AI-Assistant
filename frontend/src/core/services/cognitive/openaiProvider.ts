@@ -2,7 +2,7 @@ import OpenAI from 'openai';
 import { PredictionResult, Case, DocumentAnalysisResult, ChatMessage, QuantumFingerprintResult } from "../../types";
 
 // --- Env Variables ---
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY || import.meta.env.OPENAI_API_KEY;
 
 // Initialize Client
 // We use 'dangerouslyAllowBrowser: true' because this is a client-side demo. 
