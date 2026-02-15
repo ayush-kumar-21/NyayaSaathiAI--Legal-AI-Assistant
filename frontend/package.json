@@ -57,12 +57,14 @@
         "autoprefixer": "^10.4.17",
         "baseline-browser-mapping": "^2.9.19",
         "copy-webpack-plugin": "^13.0.1",
+        "eslint": "^8.57.1",
         "eslint-plugin-react-hooks": "^4.6.2",
         "eslint-plugin-react-refresh": "^0.4.26",
         "globals": "^13.24.0",
         "postcss": "^8.4.35",
         "tailwindcss": "^3.4.1",
         "typescript": "^5.2.2",
+        "typescript-eslint": "^7.18.0",
         "vite": "^5.1.4"
     }
 }

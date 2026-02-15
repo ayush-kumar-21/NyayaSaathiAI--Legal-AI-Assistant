@@ -23,7 +23,7 @@ async function listModels() {
         // Actually, let's just try to hit 'gemini-1.5-flash' and 'gemini-1.0-pro' and see specifically what happens.
         // Listing might not be exposed easily in the helper surface of the new SDK yet without digging into types.
 
-        const models toTry = ['gemini-1.5-flash', 'gemini-1.5-flash-001', 'gemini-1.5-flash-002', 'gemini-1.5-pro', 'gemini-1.0-pro'];
+        const models = ['gemini-1.5-flash', 'gemini-1.5-flash-001', 'gemini-1.5-flash-002', 'gemini-1.5-pro', 'gemini-1.0-pro'];
 
         for (const model of models) {
             console.log(`\nTesting ${model}...`);
