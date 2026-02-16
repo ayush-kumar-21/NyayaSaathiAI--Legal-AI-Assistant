@@ -1,43 +1,49 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
+"""
+Application configuration using Pydantic BaseSettings.
+Loads from .env file automatically.
+"""
+from pydantic_settings import BaseSettings
 from typing import List
+import json
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        extra="ignore",          # Silently ignore unknown env vars
-        env_file_encoding="utf-8",
-    )
-
-    PROJECT_NAME: str = "LegalOS 4.0"
-    VERSION: str = "4.0.0"
-    DESCRIPTION: str = "AI-powered judicial case management system"
+    # Database
+    DATABASE_URL: str = "sqlite:///./nyaya_saathi.db"
 
     # Security
-    SECRET_KEY: str = "your-secret-key-change-in-production"
-    ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
-    GOOGLE_CLIENT_ID: str = "your-google-client-id"
-    
-    # AI Keys
-    OPENAI_API_KEY: str = ""
+    JWT_SECRET: str = "default-secret-change-me"
+    JWT_ALGORITHM: str = "HS256"
+    JWT_EXPIRY_MINUTES: int = 1440
 
-    # CORS
-    CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
+    # AI
+    GEMINI_API_KEY: str = ""
+    OPENAI_API_KEY: str = "" # Added to support ChargeSheetService
+
+    # App
+    CORS_ORIGINS: str = '["http://localhost:3000"]'
+    UPLOAD_DIR: str = "./uploads"
+    MAX_UPLOAD_SIZE_MB: int = 50
+    ENVIRONMENT: str = "development"
+    GOOGLE_CLIENT_ID: str = "your-google-client-id" # Added to support auth.py
 
     @property
-    def ALLOWED_ORIGINS(self) -> List[str]:
-        return [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
+    def cors_origins_list(self) -> List[str]:
+        """Parse CORS_ORIGINS string to list."""
+        try:
+            return json.loads(self.CORS_ORIGINS)
+        except (json.JSONDecodeError, TypeError):
+            return ["http://localhost:3000"]
 
-    # Database
-    DATABASE_URL: str = "sqlite:///./legalos.db"
+    @property
+    def is_sqlite(self) -> bool:
+        return self.DATABASE_URL.startswith("sqlite")
 
-    # Redis
-    REDIS_URL: str = "redis://localhost:6379"
-
-    # Judicial Settings
-    MAX_DAILY_MINUTES: int = 330  # 5.5 hours
-    LUNCH_BREAK_MINUTES: int = 60
+    class Config:
+        env_file = ".env"
+        env_file_encoding = "utf-8"
+        extra = "ignore"  # Ignore extra env vars
 
 
+# Singleton
 settings = Settings()

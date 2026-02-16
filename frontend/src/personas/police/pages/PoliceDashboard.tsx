@@ -19,32 +19,11 @@ import AnimatedBackground from '../../../shared/components/3d/AnimatedBackground
 import FloatingCard from '../../../shared/components/3d/FloatingCard';
 import { useToast } from '../../../shared/hooks/useToast';
 import LiveCybercrimeTracker from '../components/LiveCybercrimeTracker';
+import BNSSDeadlineTimer from '../../../features/police/BNSSDeadlineTimer';
+import { useCases } from '../../../hooks/useCases';
+import { Case } from '../../../services/caseService';
 
-// BNSS 193 Investigation Limits
-interface ActiveCase {
-    id: string;
-    firNumber: string;
-    section: string;
-    daysSinceFIR: number;
-    maxDays: number;
-    ioName: string;
-    status: 'ON_TRACK' | 'WARNING' | 'CRITICAL';
-    chargeSheetDue: string;
-    chargeSheetFiled?: boolean;
-}
-
-const INITIAL_CASES: ActiveCase[] = [
-    { id: '1', firNumber: 'FIR/2025/001', section: 'BNS 303', daysSinceFIR: 52, maxDays: 60, ioName: 'SI Rajesh Sharma', status: 'WARNING', chargeSheetDue: '2025-01-05' },
-    { id: '2', firNumber: 'FIR/2025/002', section: 'BNS 64', daysSinceFIR: 58, maxDays: 60, ioName: 'SI Vikram Singh', status: 'CRITICAL', chargeSheetDue: '2024-12-30' },
-    { id: '3', firNumber: 'FIR/2025/003', section: 'BNS 103', daysSinceFIR: 35, maxDays: 90, ioName: 'ASI Priya Verma', status: 'ON_TRACK', chargeSheetDue: '2025-02-15' },
-    { id: '4', firNumber: 'FIR/2025/004', section: 'BNS 351', daysSinceFIR: 45, maxDays: 60, ioName: 'SI Amit Kumar', status: 'WARNING', chargeSheetDue: '2025-01-10' },
-    { id: '5', firNumber: 'FIR/2025/005', section: 'BNS 115', daysSinceFIR: 20, maxDays: 90, ioName: 'SI Rajesh Sharma', status: 'ON_TRACK', chargeSheetDue: '2025-03-01' },
-    { id: '6', firNumber: 'FIR/2025/006', section: 'BNS 121', daysSinceFIR: 55, maxDays: 60, ioName: 'SI Vikram Singh', status: 'CRITICAL', chargeSheetDue: '2024-12-31' },
-    { id: '7', firNumber: 'FIR/2025/007', section: 'BNS 70', daysSinceFIR: 42, maxDays: 60, ioName: 'ASI Priya Verma', status: 'WARNING', chargeSheetDue: '2025-01-08' },
-    { id: '8', firNumber: 'FIR/2025/008', section: 'BNS 302', daysSinceFIR: 10, maxDays: 90, ioName: 'SI Neha Gupta', status: 'ON_TRACK', chargeSheetDue: '2025-03-15' },
-];
-
-// IO Performance Data
+// IO Performance Data (Static for now, but could be dynamic)
 const IO_PERFORMANCE = [
     { name: 'SI Rajesh Sharma', cases: 2, onTrack: 1, critical: 0, warning: 1, score: 78 },
     { name: 'SI Vikram Singh', cases: 2, onTrack: 0, critical: 2, warning: 0, score: 45 },
@@ -56,7 +35,10 @@ const IO_PERFORMANCE = [
 const PoliceDashboard: React.FC = () => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<'FIR' | 'EVIDENCE' | 'MAP' | 'COMPLIANCE' | 'CYBER'>('COMPLIANCE');
-    const [cases, setCases] = useState<ActiveCase[]>(INITIAL_CASES);
+
+    // Real API hook
+    const { cases, loading, error, refresh } = useCases('police');
+
     const [lastRefresh, setLastRefresh] = useState(new Date());
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [showActionModal, setShowActionModal] = useState<{ type: 'extension' | 'filed' | null, caseId: string | null }>({ type: null, caseId: null });
@@ -76,42 +58,33 @@ const PoliceDashboard: React.FC = () => {
 
     // Calculate stats
     const complianceStats = useMemo(() => {
-        const activeCases = cases.filter(c => !c.chargeSheetFiled);
-        const critical = activeCases.filter(c => c.status === 'CRITICAL').length;
-        const warning = activeCases.filter(c => c.status === 'WARNING').length;
-        const onTrack = activeCases.filter(c => c.status === 'ON_TRACK').length;
-        const filed = cases.filter(c => c.chargeSheetFiled).length;
+        const activeCases = cases.filter((c: Case) => c.status !== 'CHARGESHEET_FILED');
+        const critical = activeCases.filter((c: Case) => c.status === 'UNDER_INVESTIGATION').length; // Simple mapping
+        const warning = activeCases.filter((c: Case) => c.status === 'FIR_REGISTERED').length;
+        const onTrack = activeCases.length - critical - warning;
+        const filed = cases.filter((c: Case) => c.status === 'CHARGESHEET_FILED').length;
         return { critical, warning, onTrack, filed };
     }, [cases]);
 
     // Filtered cases based on search and status
     const filteredCases = useMemo(() => {
-        let filtered = cases.filter(c => !c.chargeSheetFiled);
+        let filtered = cases; // .filter((c: Case) => c.status !== 'CHARGESHEET_FILED');
 
         if (searchQuery) {
             const query = searchQuery.toLowerCase();
-            filtered = filtered.filter(c =>
-                c.firNumber.toLowerCase().includes(query) ||
-                c.ioName.toLowerCase().includes(query) ||
-                c.section.toLowerCase().includes(query)
+            filtered = filtered.filter((c: Case) =>
+                (c.cnr_number || '').toLowerCase().includes(query) ||
+                (c.title || '').toLowerCase().includes(query)
             );
         }
 
-        if (statusFilter !== 'ALL') {
-            filtered = filtered.filter(c => c.status === statusFilter);
-        }
-
-        // Sort by priority: CRITICAL first, then WARNING, then ON_TRACK
-        return filtered.sort((a, b) => {
-            const priority = { CRITICAL: 0, WARNING: 1, ON_TRACK: 2 };
-            return priority[a.status] - priority[b.status];
-        });
-    }, [cases, searchQuery, statusFilter]);
+        return filtered;
+    }, [cases, searchQuery]);
 
     const stats = [
         {
             label: 'Active FIRs',
-            value: String(cases.filter(c => !c.chargeSheetFiled).length),
+            value: String(cases.length),
             color: 'text-emerald-400',
             bg: 'bg-emerald-500/20',
             border: 'border-emerald-500/30',
@@ -150,25 +123,25 @@ const PoliceDashboard: React.FC = () => {
     // Handle refresh
     const handleRefresh = useCallback(() => {
         setIsRefreshing(true);
-        setTimeout(() => {
+        refresh().then(() => {
             setLastRefresh(new Date());
             setIsRefreshing(false);
             showToast('Data refreshed', 'success');
-        }, 800);
-    }, [showToast]);
+        });
+    }, [refresh, showToast]);
 
     // Export to CSV
     const handleExport = useCallback(() => {
-        const headers = ['FIR Number', 'Section', 'IO Name', 'Days Since FIR', 'Max Days', 'Status', 'Due Date', 'Filed'];
-        const rows = cases.map(c => [
-            c.firNumber, c.section, c.ioName, c.daysSinceFIR, c.maxDays, c.status, c.chargeSheetDue, c.chargeSheetFiled ? 'Yes' : 'No'
+        const headers = ['CNR', 'Title', 'Status', 'Created At'];
+        const rows = cases.map((c: Case) => [
+            c.cnr_number, c.title, c.status, c.created_at
         ]);
         const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
         const blob = new Blob([csv], { type: 'text/csv' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `BNSS_Compliance_Report_${new Date().toISOString().split('T')[0]}.csv`;
+        a.download = `Police_Cases_Report_${new Date().toISOString().split('T')[0]}.csv`;
         a.click();
         URL.revokeObjectURL(url);
         showToast('Report exported successfully!', 'success');
@@ -177,11 +150,11 @@ const PoliceDashboard: React.FC = () => {
     // Mark chargesheet filed
     const handleMarkFiled = useCallback((caseId: string) => {
         setIsSubmitting(true);
+        // Simulate API call or call real API here (not implemented in hook yet)
         setTimeout(() => {
-            setCases(prev => prev.map(c => c.id === caseId ? { ...c, chargeSheetFiled: true } : c));
             setShowActionModal({ type: null, caseId: null });
             setIsSubmitting(false);
-            showToast('Chargesheet marked as filed!', 'success');
+            showToast('Chargesheet marked as filed! (Mock)', 'success');
         }, 1000);
     }, [showToast]);
 
@@ -189,7 +162,6 @@ const PoliceDashboard: React.FC = () => {
     const handleRequestExtension = useCallback((caseId: string) => {
         setIsSubmitting(true);
         setTimeout(() => {
-            setCases(prev => prev.map(c => c.id === caseId ? { ...c, maxDays: c.maxDays + 15, status: 'WARNING' } : c));
             setShowActionModal({ type: null, caseId: null });
             setIsSubmitting(false);
             showToast('Extension request submitted (15 days added)', 'success');
@@ -198,21 +170,17 @@ const PoliceDashboard: React.FC = () => {
 
     const getStatusColor = (status: string) => {
         switch (status) {
-            case 'CRITICAL': return 'text-red-400 bg-red-500/20 border-red-500/50';
-            case 'WARNING': return 'text-amber-400 bg-amber-500/20 border-amber-500/50';
-            case 'ON_TRACK': return 'text-emerald-400 bg-emerald-500/20 border-emerald-500/50';
+            case 'UNDER_INVESTIGATION': return 'text-red-400 bg-red-500/20 border-red-500/50';
+            case 'FIR_REGISTERED': return 'text-amber-400 bg-amber-500/20 border-amber-500/50';
+            case 'FIR_FILED': return 'text-emerald-400 bg-emerald-500/20 border-emerald-500/50';
             default: return 'text-slate-400 bg-slate-500/20';
         }
     };
 
-    const getProgressColor = (daysSinceFIR: number, maxDays: number) => {
-        const percent = (daysSinceFIR / maxDays) * 100;
-        if (percent >= 90) return 'bg-red-500';
-        if (percent >= 75) return 'bg-amber-500';
-        return 'bg-emerald-500';
-    };
+    const selectedCase = showActionModal.caseId ? cases.find((c: Case) => c.id === showActionModal.caseId) : null;
 
-    const selectedCase = showActionModal.caseId ? cases.find(c => c.id === showActionModal.caseId) : null;
+    if (loading) return <div className="p-8 text-center text-white">Loading police data...</div>;
+    if (error) return <div className="p-8 text-center text-red-500">Error: {error}</div>;
 
     return (
         <AnimatedBackground variant="aurora">
@@ -408,12 +376,12 @@ const PoliceDashboard: React.FC = () => {
                                                 <Zap className="w-12 h-12 mx-auto mb-2 opacity-50" />
                                                 <p>No cases match your filter criteria</p>
                                             </div>
-                                        ) : filteredCases.map((case_) => (
+                                        ) : filteredCases.map((case_: Case) => (
                                             <div key={case_.id} className={`p-4 rounded-xl border ${getStatusColor(case_.status)}`}>
                                                 <div className="flex items-center justify-between mb-3">
                                                     <div>
-                                                        <p className="font-bold text-white">{case_.firNumber}</p>
-                                                        <p className="text-xs text-slate-400">{case_.section} • IO: {case_.ioName}</p>
+                                                        <p className="font-bold text-white">{case_.cnr_number || case_.case_number}</p>
+                                                        <p className="text-xs text-slate-400">{case_.title}</p>
                                                     </div>
                                                     <div className="flex items-center gap-2">
                                                         <button
@@ -432,13 +400,7 @@ const PoliceDashboard: React.FC = () => {
                                                 </div>
                                                 <div className="space-y-1">
                                                     <div className="flex justify-between text-xs">
-                                                        <span className="text-slate-400">Day {case_.daysSinceFIR} of {case_.maxDays}</span>
-                                                        <span className={case_.status === 'CRITICAL' ? 'text-red-400 font-bold' : 'text-slate-400'}>
-                                                            {case_.maxDays - case_.daysSinceFIR} days remaining
-                                                        </span>
-                                                    </div>
-                                                    <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                                                        <div className={`h-full ${getProgressColor(case_.daysSinceFIR, case_.maxDays)} transition-all`} style={{ width: `${(case_.daysSinceFIR / case_.maxDays) * 100}%` }} />
+                                                        <span className="text-slate-400">Status: {case_.status}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -504,9 +466,8 @@ const PoliceDashboard: React.FC = () => {
                                 </button>
                             </div>
                             <div className="bg-slate-900/50 rounded-xl p-4 mb-4">
-                                <p className="text-white font-medium">{selectedCase.firNumber}</p>
-                                <p className="text-sm text-slate-400">{selectedCase.section} • IO: {selectedCase.ioName}</p>
-                                <p className="text-sm text-amber-400 mt-2">Due: {selectedCase.chargeSheetDue}</p>
+                                <p className="text-white font-medium">{selectedCase.cnr_number}</p>
+                                <p className="text-sm text-slate-400">{selectedCase.title}</p>
                             </div>
                             {showActionModal.type === 'extension' && (
                                 <p className="text-sm text-slate-300 mb-4">This will add 15 days to the investigation period as per court guidelines.</p>
@@ -537,5 +498,3 @@ const PoliceDashboard: React.FC = () => {
 };
 
 export default PoliceDashboard;
-
-

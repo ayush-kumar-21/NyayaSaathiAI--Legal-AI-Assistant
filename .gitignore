@@ -148,3 +148,5 @@ reproduce_bcrypt.py
 PRODUCTION_DEPLOYMENT_GUIDE.md
 .gemini/
 AuthorPhotos/
+*.db-shm
+*.db-wal

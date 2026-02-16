@@ -8,7 +8,7 @@ from sqlalchemy import desc
 from typing import List, Optional
 from datetime import datetime, timedelta
 
-from app.db.database import get_db
+from app.db.session import get_db
 from app.models.audit import AuditLog, DataAccessLog, AuditAction, ResourceType
 from app.models.user import User
 from app.schemas.auth import AuditLogResponse

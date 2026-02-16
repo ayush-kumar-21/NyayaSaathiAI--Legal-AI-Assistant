@@ -17,7 +17,7 @@ results = {
     "tests": []
 }
 
-def test(name, condition, details=""):
+def verify_step(name, condition, details=""):
     """Record test result"""
     status = "PASS" if condition else "FAIL"
     results["tests"].append({
@@ -58,20 +58,20 @@ def run_tests():
     try:
         response = requests.post(f"{AUTH_URL}/signup", json=citizen_data, timeout=5)
         citizen_token = response.json().get("access_token") if response.status_code == 200 else None
-        test(
+        verify_step(
             "Citizen signup succeeds",
             response.status_code == 200,
             f"Status: {response.status_code}, Response: {response.text[:100]}"
         )
         
         if citizen_token:
-            test(
+            verify_step(
                 "Citizen receives JWT token",
                 len(citizen_token) > 20,
                 f"Token length: {len(citizen_token) if citizen_token else 0}"
             )
     except Exception as e:
-        test("Citizen signup succeeds", False, str(e))
+        verify_step("Citizen signup succeeds", False, str(e))
         citizen_token = None
     
     # ========== TEST 2: Citizen Login ==========
@@ -83,7 +83,7 @@ def run_tests():
             "email": citizen_email,
             "password": "Citizen123!"
         }, timeout=5)
-        test(
+        verify_step(
             "Citizen login succeeds",
             response.status_code == 200,
             f"Status: {response.status_code}"
@@ -91,18 +91,18 @@ def run_tests():
         
         if response.status_code == 200:
             data = response.json()
-            test(
+            verify_step(
                 "Login returns user profile",
                 "user_name" in data and "user_role" in data,
                 f"Keys: {list(data.keys())}"
             )
-            test(
+            verify_step(
                 "User role is citizen",
                 data.get("user_role") == "citizen",
                 f"Role: {data.get('user_role')}"
             )
     except Exception as e:
-        test("Citizen login succeeds", False, str(e))
+        verify_step("Citizen login succeeds", False, str(e))
     
     # ========== TEST 3: Police Registration ==========
     print("\n[TEST 3] Police Officer Registration")
@@ -121,7 +121,7 @@ def run_tests():
     try:
         response = requests.post(f"{AUTH_URL}/signup", json=police_data, timeout=5)
         police_token = response.json().get("access_token") if response.status_code == 200 else None
-        test(
+        verify_step(
             "Police signup succeeds",
             response.status_code == 200,
             f"Status: {response.status_code}, Response: {response.text[:100]}"
@@ -129,13 +129,13 @@ def run_tests():
         
         if response.status_code == 200:
             data = response.json()
-            test(
+            verify_step(
                 "Police user has correct role",
                 data.get("user_role") == "police",
                 f"Role: {data.get('user_role')}"
             )
     except Exception as e:
-        test("Police signup succeeds", False, str(e))
+        verify_step("Police signup succeeds", False, str(e))
         police_token = None
     
     # ========== TEST 4: Judge Registration ==========
@@ -154,7 +154,7 @@ def run_tests():
     try:
         response = requests.post(f"{AUTH_URL}/signup", json=judge_data, timeout=5)
         judge_token = response.json().get("access_token") if response.status_code == 200 else None
-        test(
+        verify_step(
             "Judge signup succeeds",
             response.status_code == 200,
             f"Status: {response.status_code}"
@@ -162,13 +162,13 @@ def run_tests():
         
         if response.status_code == 200:
             data = response.json()
-            test(
+            verify_step(
                 "Judge user has correct role",
                 data.get("user_role") == "judge",
                 f"Role: {data.get('user_role')}"
             )
     except Exception as e:
-        test("Judge signup succeeds", False, str(e))
+        verify_step("Judge signup succeeds", False, str(e))
         judge_token = None
     
     # ========== TEST 5: Duplicate Email Prevention ==========
@@ -177,13 +177,13 @@ def run_tests():
     
     try:
         response = requests.post(f"{AUTH_URL}/signup", json=citizen_data, timeout=5)
-        test(
+        verify_step(
             "Duplicate email rejected",
             response.status_code == 400,
             f"Status: {response.status_code}"
         )
     except Exception as e:
-        test("Duplicate email prevention works", False, str(e))
+        verify_step("Duplicate email prevention works", False, str(e))
     
     # ========== TEST 6: Wrong Password Rejection ==========
     print("\n[TEST 6] Wrong Password Rejection")
@@ -194,13 +194,13 @@ def run_tests():
             "email": citizen_email,
             "password": "WrongPassword123!"
         }, timeout=5)
-        test(
+        verify_step(
             "Wrong password rejected",
             response.status_code == 400,
             f"Status: {response.status_code}"
         )
     except Exception as e:
-        test("Wrong password rejection works", False, str(e))
+        verify_step("Wrong password rejection works", False, str(e))
     
     # ========== TEST 7: Google OAuth Simulation ==========
     print("\n[TEST 7] Google OAuth Flow")
@@ -210,7 +210,7 @@ def run_tests():
         response = requests.post(f"{AUTH_URL}/google", json={
             "token": "mock_google_token_for_testing"
         }, timeout=5)
-        test(
+        verify_step(
             "Google OAuth succeeds",
             response.status_code == 200,
             f"Status: {response.status_code}"
@@ -218,13 +218,13 @@ def run_tests():
         
         if response.status_code == 200:
             data = response.json()
-            test(
+            verify_step(
                 "Google user gets citizen role by default",
                 data.get("user_role") == "citizen",
                 f"Role: {data.get('user_role')}"
             )
     except Exception as e:
-        test("Google OAuth works", False, str(e))
+        verify_step("Google OAuth works", False, str(e))
     
     # ========== TEST 8: Token Verification ==========
     print("\n[TEST 8] JWT Token Verification")
@@ -235,7 +235,7 @@ def run_tests():
             # Test accessing a protected endpoint (if available)
             # For now, just verify token structure
             parts = citizen_token.split('.')
-            test(
+            verify_step(
                 "Token has valid JWT structure (3 parts)",
                 len(parts) == 3,
                 f"Parts: {len(parts)}"
@@ -249,25 +249,25 @@ def run_tests():
             decoded = base64.urlsafe_b64decode(payload + padding)
             token_data = json.loads(decoded)
             
-            test(
+            verify_step(
                 "Token contains user email",
                 "sub" in token_data and citizen_email in str(token_data.get("sub")),
                 f"Token data: {token_data}"
             )
-            test(
+            verify_step(
                 "Token contains role",
                 "role" in token_data,
                 f"Keys: {list(token_data.keys())}"
             )
-            test(
+            verify_step(
                 "Token has expiration",
                 "exp" in token_data,
                 f"Keys: {list(token_data.keys())}"
             )
         except Exception as e:
-            test("Token verification works", False, str(e))
+            verify_step("Token verification works", False, str(e))
     else:
-        test("Token verification skipped (no token)", False, "Citizen signup failed")
+        verify_step("Token verification skipped (no token)", False, "Citizen signup failed")
     
     # ========== TEST 9: Data Isolation Check ==========
     print("\n[TEST 9] Data Isolation Verification")
@@ -275,7 +275,7 @@ def run_tests():
     
     # Verify different users have different tokens
     if citizen_token and police_token:
-        test(
+        verify_step(
             "Citizen and Police have different tokens",
             citizen_token != police_token,
             "Tokens are unique per user"
@@ -291,13 +291,13 @@ def run_tests():
             decoded = base64.urlsafe_b64decode(payload + padding)
             token_data = json.loads(decoded)
             
-            test(
+            verify_step(
                 "Police token contains role",
                 token_data.get("role") == "police",
                 f"Role in token: {token_data.get('role')}"
             )
         except Exception as e:
-            test("Police token verification", False, str(e))
+            verify_step("Police token verification", False, str(e))
     
     # ========== PRINT SUMMARY ==========
     print("\n" + "=" * 60)

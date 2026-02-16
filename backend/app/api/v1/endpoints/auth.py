@@ -3,7 +3,9 @@ from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from typing import Optional
 from sqlalchemy.orm import Session
-from app.db.database import get_db, engine, Base
+from app.db.session import get_db
+from app.db.database import engine
+from app.models.base import Base
 from app.models.user import User
 from app.core.security import verify_password, get_password_hash, create_access_token
 from google.oauth2 import id_token
@@ -60,28 +62,26 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
     hashed_password = get_password_hash(user.password)
     new_user = User(
         email=user.email,
-        hashed_password=hashed_password,
+        password_hash=hashed_password,
         role=user.role,
         full_name=user.full_name,
-        station_id=user.station_id,
+        police_station_id=user.station_id,
         court_id=user.court_id,
-        department=user.department,
         badge_number=user.badge_number,
-        date_of_birth=user.date_of_birth,
-        avatar=f"https://api.dicebear.com/7.x/avataaars/svg?seed={user.full_name}"
+        # department/dob/avatar not in model currently
     )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
     
-    access_token = create_access_token(data={"sub": new_user.email, "role": new_user.role, "id": new_user.id})
+    access_token = create_access_token(data={"sub": new_user.email, "role": new_user.role.value if hasattr(new_user.role, 'value') else new_user.role, "id": str(new_user.id)})
     return {
         "access_token": access_token,
         "token_type": "bearer",
         "user_name": new_user.full_name,
         "user_email": new_user.email,
         "user_role": new_user.role,
-        "avatar": new_user.avatar
+        "avatar": f"https://api.dicebear.com/7.x/avataaars/svg?seed={new_user.full_name}"
     }
 
 @router.post("/login", response_model=AuthResponse)
@@ -118,17 +118,17 @@ def login(creds: LoginRequest, db: Session = Depends(get_db)):
             }
         raise HTTPException(status_code=400, detail="Incorrect email or password")
         
-    if not verify_password(creds.password, user.hashed_password):
+    if not verify_password(creds.password, user.password_hash):
         raise HTTPException(status_code=400, detail="Incorrect email or password")
         
-    access_token = create_access_token(data={"sub": user.email, "role": user.role, "id": user.id})
+    access_token = create_access_token(data={"sub": user.email, "role": user.role.value if hasattr(user.role, 'value') else user.role, "id": str(user.id)})
     return {
         "access_token": access_token,
         "token_type": "bearer",
         "user_name": user.full_name,
         "user_email": user.email,
         "user_role": user.role,
-        "avatar": user.avatar
+        "avatar": f"https://api.dicebear.com/7.x/avataaars/svg?seed={user.full_name}"
     }
 
 @router.post("/google", response_model=AuthResponse)
@@ -196,10 +196,10 @@ def google_login(payload: GoogleLoginRequest, db: Session = Depends(get_db)):
             try:
                 user = User(
                     email=email,
-                    hashed_password=get_password_hash("google_auth"),
+                    password_hash=get_password_hash("google_auth"),
                     role="CITIZEN",
                     full_name=name,
-                    avatar=picture or f"https://api.dicebear.com/7.x/avataaars/svg?seed={name}"
+                    # avatar not stored
                 )
                 db.add(user)
                 db.commit()
@@ -212,14 +212,14 @@ def google_login(payload: GoogleLoginRequest, db: Session = Depends(get_db)):
         else:
             print(f"DEBUG: Found existing user: {email}")
         
-        access_token = create_access_token(data={"sub": user.email, "role": user.role, "id": user.id})
+        access_token = create_access_token(data={"sub": user.email, "role": user.role.value if hasattr(user.role, 'value') else user.role, "id": str(user.id)})
         return {
             "access_token": access_token,
             "token_type": "bearer",
             "user_name": user.full_name,
             "user_email": user.email,
             "user_role": user.role,
-            "avatar": user.avatar
+            "avatar": picture or f"https://api.dicebear.com/7.x/avataaars/svg?seed={user.full_name}"
         }
 
     except HTTPException:

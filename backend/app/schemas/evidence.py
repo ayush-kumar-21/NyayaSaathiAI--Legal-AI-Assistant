@@ -1,43 +1,22 @@
-"""
-Digital Evidence Locker (Sakshya) Schemas - Skill 03
-Blockchain-inspired chain of custody for digital evidence
-"""
-from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Any
+from pydantic import BaseModel
+from typing import Optional, List, Dict
 from datetime import datetime
 from enum import Enum
 
-
-class EvidenceType(str, Enum):
-    DOCUMENT = "document"
-    IMAGE = "image"
-    VIDEO = "video"
-    AUDIO = "audio"
-    FORENSIC_REPORT = "forensic_report"
-    PHYSICAL_ITEM_RECORD = "physical_item_record"
-    OTHER = "other"
-
-
 class EvidenceStatus(str, Enum):
-    COLLECTED = "collected"
-    SEALED = "sealed"
-    ANALYZED = "analyzed"
-    SUBMITTED_TO_COURT = "submitted_to_court"
-    ARCHIVED = "archived"
-    DISPOSED = "disposed"
-
+    COLLECTED = "COLLECTED"
+    SEALED = "SEALED"
+    SUBMITTED = "SUBMITTED"
+    VERIFIED = "VERIFIED"
+    TAMPERED = "TAMPERED"
 
 class CustodyAction(str, Enum):
-    COLLECTED = "collected"
-    UPLOADED = "uploaded"
-    ACCESSED = "accessed"
-    TRANSFERRED = "transferred"
-    SEALED = "sealed"
-    UNSEALED = "unsealed"
-    ANALYZED = "analyzed"
-    CHECKED_OUT = "checked_out"
-    CHECKED_IN = "checked_in"
-
+    COLLECTED = "COLLECTED"
+    TRANSFERRED = "TRANSFERRED"
+    RECEIVED = "RECEIVED"
+    SEALED = "SEALED"
+    UNSEALED = "UNSEALED"
+    SUBMITTED_TO_COURT = "SUBMITTED_TO_COURT"
 
 class ChainOfCustodyEvent(BaseModel):
     id: str
@@ -47,55 +26,73 @@ class ChainOfCustodyEvent(BaseModel):
     actor_name: str
     actor_role: str
     action: CustodyAction
-    location: str
+    location: Optional[str] = None
     comments: Optional[str] = None
-    previous_hash: str  # Link to previous event for tamper-evidence
-    event_hash: str     # Hash of this event's data
+    previous_hash: str
+    event_hash: str
 
-
-class Evidence(BaseModel):
-    id: str
-    case_id: str
-    title: str
-    description: str
-    evidence_type: EvidenceType
-    file_url: Optional[str] = None  # Mock URL
-    file_hash: str  # SHA-256 of the file content
-    file_size_bytes: int
-    collection_date: datetime
-    collection_location: str
-    collected_by: str
-    current_status: EvidenceStatus
-    custodian_id: str
-    tags: List[str] = []
-    metadata: Dict[str, Any] = {}
-    
-    # Verification
-    is_tampered: bool = False
-    blockchain_tx_id: Optional[str] = None  # Mock blockchain reference
-
+    class Config:
+        from_attributes = True
 
 class EvidenceCreate(BaseModel):
-    case_id: str
     title: str
-    description: str
-    evidence_type: EvidenceType
-    collection_location: str
+    description: Optional[str] = None
+    case_id: str
+    evidence_type: str
     collection_date: Optional[datetime] = None
-    tags: List[str] = []
-    metadata: Dict[str, Any] = {}
+    collection_location: Optional[str] = None
+    tags: Optional[List[str]] = []
+    metadata: Optional[Dict] = {}
 
+class Evidence(EvidenceCreate):
+    id: str
+    file_url: str
+    file_hash: str
+    file_size_bytes: int
+    current_status: EvidenceStatus
+    custodian_id: str
+    blockchain_tx_id: Optional[str] = None
+    chain_of_custody: List[ChainOfCustodyEvent] = []
+
+    class Config:
+        from_attributes = True
+
+class EvidenceUpload(BaseModel):
+    case_id: str
+    evidence_type: str
+    description: Optional[str] = None
+    file_name: str
+
+class EvidenceResponse(BaseModel):
+    id: str
+    case_id: str
+    evidence_type: str
+    file_name: Optional[str]
+    sha256_hash: Optional[str] = None
+    file_hash: Optional[str] = None # For compatibility
+    verification_status: Optional[str] = None
+    current_status: Optional[EvidenceStatus] = None # For compatibility
+    blockchain_block_number: Optional[int] = None
+    collected_at: Optional[datetime] = None
+    evidence: Optional[Evidence] = None # Nested full object if needed
+    chain_of_custody: Optional[List[ChainOfCustodyEvent]] = None
+    integrity_status: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class VerificationResult(BaseModel):
+    evidence_id: str
+    original_hash: str
+    current_hash: str
+    is_verified: bool
+    block_number: Optional[int]
+    verified_at: str
+    bsa_certificate: Optional[str] = None
 
 class CustodyTransferRequest(BaseModel):
     evidence_id: str
     to_user_id: str
-    to_user_name: str
+    action: CustodyAction
     location: str
-    comments: str
-    action: CustodyAction = CustodyAction.TRANSFERRED
-
-
-class EvidenceResponse(BaseModel):
-    evidence: Evidence
-    chain_of_custody: List[ChainOfCustodyEvent]
-    integrity_status: str  # "VERIFIED", "TAMPERED", "UNKNOWN"
+    comments: Optional[str] = None
