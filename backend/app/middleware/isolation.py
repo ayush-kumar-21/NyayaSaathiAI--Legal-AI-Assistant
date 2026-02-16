@@ -9,7 +9,7 @@ from sqlalchemy import and_
 from typing import Optional, Type, Any
 from functools import wraps
 
-from app.db.database import get_db
+from app.db.session import get_db
 from app.models.user import User
 from app.schemas.auth import UserRole
 from app.dependencies import get_current_user

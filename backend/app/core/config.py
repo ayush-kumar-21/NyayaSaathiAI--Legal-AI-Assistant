@@ -18,12 +18,14 @@ class Settings(BaseSettings):
 
     # AI
     GEMINI_API_KEY: str = ""
+    OPENAI_API_KEY: str = "" # Added to support ChargeSheetService
 
     # App
     CORS_ORIGINS: str = '["http://localhost:3000"]'
     UPLOAD_DIR: str = "./uploads"
     MAX_UPLOAD_SIZE_MB: int = 50
     ENVIRONMENT: str = "development"
+    GOOGLE_CLIENT_ID: str = "your-google-client-id" # Added to support auth.py
 
     @property
     def cors_origins_list(self) -> List[str]:

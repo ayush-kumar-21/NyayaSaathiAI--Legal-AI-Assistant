@@ -47,7 +47,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
     # Signature
     signing_input = f"{header_b64}.{payload_b64}".encode('utf-8')
     signature = hmac.new(
-        settings.SECRET_KEY.encode('utf-8'),
+        settings.JWT_SECRET.encode('utf-8'),
         signing_input,
         hashlib.sha256
     ).digest()
@@ -66,7 +66,7 @@ def verify_token(token: str) -> Optional[Dict[str, Any]]:
         # Verify Signature
         signing_input = f"{header_b64}.{payload_b64}".encode('utf-8')
         expected_signature = hmac.new(
-            settings.SECRET_KEY.encode('utf-8'),
+            settings.JWT_SECRET.encode('utf-8'),
             signing_input,
             hashlib.sha256
         ).digest()

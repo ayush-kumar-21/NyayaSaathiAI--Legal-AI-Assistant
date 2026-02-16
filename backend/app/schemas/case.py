@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import Optional, List, Union
 from datetime import datetime
+from uuid import UUID
 from app.models.enums import CaseStatus, CasePriority
 
 
@@ -13,15 +14,15 @@ class CaseCreate(BaseModel):
 
 
 class CaseResponse(BaseModel):
-    id: str
+    id: Union[str, UUID]
     cnr: str
     status: CaseStatus
     priority: CasePriority
     fir_filed_date: Optional[datetime]
     bnss_days_remaining: Optional[int] = None
-    citizen_id: str
-    assigned_io_id: Optional[str] = None
-    assigned_judge_id: Optional[str] = None
+    citizen_id: Union[str, UUID]
+    assigned_io_id: Optional[Union[str, UUID]] = None
+    assigned_judge_id: Optional[Union[str, UUID]] = None
     created_at: datetime
 
     class Config:

@@ -38,7 +38,12 @@ async def get_current_user(
             settings.JWT_SECRET,
             algorithms=[settings.JWT_ALGORITHM]
         )
-        user_id: str = payload.get("sub")
+        print(f"DEBUG: Decoded payload: {payload}")
+        # Try to get ID from 'id' claim, fallback to 'sub' if it looks like a UUID
+        user_id: str = payload.get("id")
+        if not user_id:
+             user_id = payload.get("sub")
+
         if user_id is None:
             raise HTTPException(status_code=401, detail="Invalid token")
     except JWTError:

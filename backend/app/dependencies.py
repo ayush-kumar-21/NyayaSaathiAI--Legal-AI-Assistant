@@ -7,7 +7,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from typing import Optional
 
-from app.db.database import get_db
+from app.db.session import get_db
 from app.models.user import User
 from app.core.security import verify_token
 

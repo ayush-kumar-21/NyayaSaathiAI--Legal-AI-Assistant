@@ -4,6 +4,7 @@ import { Mic, MicOff, Loader2, CheckCircle, AlertTriangle, FileText, Globe, Cale
 import { getApplicableLaw, getSectionDetails, detectCrimeType, ACT_NAMES } from '../../../core/legal/offenceMapper';
 import type { PilotCase, OffenceType } from '../../../types/pilot';
 import { useCitizenTranslation } from '../../../features/citizen/hooks/useCitizenTranslation';
+import api from '../../../core/services/api';
 
 /**
  * VoiceFilingInterface - Multilingual voice-first complaint filing.
@@ -160,29 +161,45 @@ const VoiceFilingInterface: React.FC = () => {
         };
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!extractedData) return;
 
         setSubmissionStatus('submitting');
 
-        // Simulate network + blockchain delay (Mock for pilot)
-        setTimeout(() => {
-            // Generate mock blockchain hash
+        try {
+            // Call Real Backend
+            const response = await api.post('/citizen/cases/file', {
+                complaint_narrative: extractedData.summary || transcript,
+                incident_location: isZeroFir ? "Zero FIR Transfer Pending" : "Unknown Location", // TODO: Add location input
+                incident_datetime: incidentDate ? new Date(incidentDate).toISOString() : new Date().toISOString(),
+                priority: extractedData.urgency || "MEDIUM"
+            });
+
+            const result = response.data;
+
+            // Generate mock blockchain hash (Backend handles real hashing, but for demo UI we show it)
             const mockHash = `0x${Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join('')}`;
+
             setSubmissionStatus('success');
             setTxHash(mockHash);
-            setCnr(extractedData.cnrNumber || '');
+            setCnr(result.cnr || result.id); // Use real CNR from backend
 
             // Store in localStorage for Zero FIR tracking
-            if (extractedData.isZeroFir) {
+            if (isZeroFir) {
                 const zeroFirData = {
                     ...extractedData,
+                    id: result.id,
+                    cnrNumber: result.cnr,
                     blockHash: mockHash,
                     submittedAt: new Date().toISOString()
                 };
-                localStorage.setItem(`zfir_${extractedData.id}`, JSON.stringify(zeroFirData));
+                localStorage.setItem(`zfir_${result.id}`, JSON.stringify(zeroFirData));
             }
-        }, 2000);
+        } catch (error) {
+            console.error("Filing failed:", error);
+            setSubmissionStatus('error');
+            alert("Failed to submit case. Please try again.");
+        }
     };
 
     // Browser Compatibility Check

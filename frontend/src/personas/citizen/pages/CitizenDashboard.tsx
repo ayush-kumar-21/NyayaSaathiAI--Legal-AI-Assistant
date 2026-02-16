@@ -2,14 +2,39 @@ import React, { useState } from 'react';
 import {
     FileText, ShieldCheck, Activity, Scale, AlertTriangle,
     Phone, MessageSquare, Clock, ChevronRight, Bell, HelpCircle,
-    Mic, FileQuestion, MapPin
+    Mic, FileQuestion, MapPin, Plus
 } from 'lucide-react';
 import { User } from '../../../features/main/types';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useCases } from '../../../hooks/useCases';
+import { Case } from '../../../services/caseService';
+import api from '../../../core/services/api';
 
 // Lazy-load citizen modules with error boundaries
 const VoiceFilingInterface = React.lazy(() => import('./VoiceFilingInterface'));
 const NyayaPath: React.FC = () => <div className="p-4"><h3 className="font-semibold text-[var(--hi)] text-sm">Case Journey</h3><p className="text-sm text-[var(--mid)]">Your case progress will appear here.</p></div>;
-const EmergencySOS: React.FC = () => <a href="tel:100" className="block w-full p-6 bg-ns-danger-600/20 border border-ns-danger-600/30 rounded-2xl text-center"><span className="font-bold text-ns-danger-600 text-lg">🚨 EMERGENCY: Call 100</span></a>;
+
+const EmergencySOS: React.FC = () => {
+    const handleSOS = async () => {
+        if (confirm("Are you sure you want to trigger an SOS Alert to the Police?")) {
+            try {
+                await api.post('/citizen/cases/sos', { location: 'Browser Location (Demo)' });
+                alert("🚨 SOS Alert Sent! Police have been notified.");
+                window.location.href = 'tel:100';
+            } catch (e) {
+                alert("Failed to send digital SOS. Dialing 100...");
+                window.location.href = 'tel:100';
+            }
+        }
+    };
+    return (
+        <button onClick={handleSOS} className="block w-full p-6 bg-ns-danger-600/20 border border-ns-danger-600/30 rounded-2xl text-center hover:bg-ns-danger-600/30 transition-colors">
+            <span className="font-bold text-ns-danger-600 text-lg">🚨 EMERGENCY: Call 100</span>
+        </button>
+    );
+};
+
 const RightsAssistant: React.FC = () => <div className="p-4 text-center"><p className="text-sm text-[var(--low)]">Legal Rights Assistant coming soon.</p></div>;
 
 // ============================================
@@ -99,14 +124,10 @@ const NyayaPathFallback: React.FC = () => (
 );
 
 const SOSFallback: React.FC = () => (
-    <a
-        href="tel:100"
-        className="block w-full p-6 bg-ns-danger-600/20 border border-ns-danger-600/30 rounded-2xl text-center hover:bg-ns-danger-600/30 transition-colors"
-        aria-label="Emergency SOS - Call Police"
-    >
+    <div className="block w-full p-6 bg-ns-danger-600/20 border border-ns-danger-600/30 rounded-2xl text-center">
         <Phone className="w-10 h-10 mx-auto mb-2 text-ns-danger-600" />
         <span className="font-bold text-ns-danger-600 text-lg">EMERGENCY: Call 100</span>
-    </a>
+    </div>
 );
 
 const RightsAssistantFallback: React.FC = () => (
@@ -130,6 +151,11 @@ const RightsAssistantFallback: React.FC = () => (
 const CitizenDashboard: React.FC<CitizenDashboardProps> = ({ currentUser, t: _t, theme: _theme }) => {
     // activeWidget state for future widget panel switching (Phase 2)
     const [, setActiveWidget] = useState<'filing' | 'rights' | null>(null);
+    const { t } = useTranslation();
+    const navigate = useNavigate();
+
+    // Real API hook
+    const { cases, loading, error } = useCases('citizen');
 
     // Defensive check per implementation plan
     if (!currentUser) {
@@ -143,6 +169,9 @@ const CitizenDashboard: React.FC<CitizenDashboardProps> = ({ currentUser, t: _t,
             </div>
         );
     }
+
+    if (loading) return <div className="p-8 text-center">Loading cases...</div>;
+    if (error) return <div className="p-8 text-center text-red-500">Error: {error}</div>;
 
     // Extract name from email (before @) since User type only has email
     const userName = currentUser.email?.split('@')[0]?.split('.')[0] || 'Citizen';
@@ -164,7 +193,18 @@ const CitizenDashboard: React.FC<CitizenDashboardProps> = ({ currentUser, t: _t,
             title: 'Track Case',
             description: 'Real-time status updates',
             bgColor: 'rgba(74, 163, 255, 0.2)',   // ns-primary-500/20
-            textColor: '#4AA3FF'                   // ns-primary-500
+            textColor: '#4AA3FF',                  // ns-primary-500
+            onClick: async () => {
+                const cnr = prompt("Enter Case CNR Number (e.g., DL/2026/0005001):");
+                if (cnr) {
+                    try {
+                        const res = await api.get(`/citizen/cases/track/${cnr}`);
+                        alert(`Case Found!\nStatus: ${res.data.status}\nNext Hearing: ${res.data.next_hearing_date || 'Not Scheduled'}`);
+                    } catch (e) {
+                        alert("Case not found or access denied.");
+                    }
+                }
+            }
         },
         {
             id: 'legal-help',
@@ -371,14 +411,7 @@ const CitizenDashboard: React.FC<CitizenDashboardProps> = ({ currentUser, t: _t,
                 ======================================== */}
             <div className="fixed bottom-4 left-4 right-4 sm:hidden z-50 safe-area-pb">
                 <ModuleErrorBoundary fallback={<SOSFallback />}>
-                    <button
-                        className="w-full py-4 bg-ns-danger-600 text-white font-bold rounded-2xl shadow-[0_0_30px_rgba(255,61,90,0.4)] flex items-center justify-center gap-3"
-                        aria-label="Emergency SOS - Call Police"
-                        onClick={() => window.location.href = 'tel:100'}
-                    >
-                        <AlertTriangle className="w-6 h-6" />
-                        EMERGENCY SOS
-                    </button>
+                    <EmergencySOS />
                 </ModuleErrorBoundary>
             </div>
         </div>
