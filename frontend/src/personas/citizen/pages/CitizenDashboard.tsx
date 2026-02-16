@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useCases } from '../../../hooks/useCases';
 import { Case } from '../../../services/caseService';
-import api from '../../../core/services/api';
+import { api } from '../../../lib/api';
 
 // Lazy-load citizen modules with error boundaries
 const VoiceFilingInterface = React.lazy(() => import('./VoiceFilingInterface'));

@@ -45,11 +45,14 @@ class AnalyticsService:
         pending = total - disposed
 
         # Average disposal time (for disposed cases with both dates)
-        avg_days_query = self.db.query(
-            func.avg(
-                func.julianday(Case.judgment_date) - func.julianday(Case.fir_filed_date)
-            )
-        ).filter(
+        # Compatible with both SQLite (julianday) and PostgreSQL (epoch extraction)
+        if self.db.bind.dialect.name == "sqlite":
+            date_diff = func.julianday(Case.judgment_date) - func.julianday(Case.fir_filed_date)
+        else:
+            # PostgreSQL: extract epoch from interval
+            date_diff = func.extract('epoch', Case.judgment_date - Case.fir_filed_date) / 86400
+
+        avg_days_query = self.db.query(func.avg(date_diff)).filter(
             Case.judgment_date.isnot(None),
             Case.fir_filed_date.isnot(None),
         ).scalar()

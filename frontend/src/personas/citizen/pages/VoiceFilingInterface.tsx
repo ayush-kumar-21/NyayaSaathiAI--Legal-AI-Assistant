@@ -4,7 +4,7 @@ import { Mic, MicOff, Loader2, CheckCircle, AlertTriangle, FileText, Globe, Cale
 import { getApplicableLaw, getSectionDetails, detectCrimeType, ACT_NAMES } from '../../../core/legal/offenceMapper';
 import type { PilotCase, OffenceType } from '../../../types/pilot';
 import { useCitizenTranslation } from '../../../features/citizen/hooks/useCitizenTranslation';
-import api from '../../../core/services/api';
+import { api } from '../../../lib/api';
 
 /**
  * VoiceFilingInterface - Multilingual voice-first complaint filing.
